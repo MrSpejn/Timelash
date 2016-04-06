@@ -7,7 +7,7 @@ import leftPad from '../left-pad.util.js';
    constructor() {
      super();
      this.state = {time: 0};
-     this.max = 120;
+     this.max = 10;
    }
 
    componentDidMount() {
@@ -17,15 +17,27 @@ import leftPad from '../left-pad.util.js';
      this.context = ctx;
 
      this.paintRing(this.state.time * 360 / this.max);
-     window.setTimeout(this.oneSecondPassed.bind(this), 1000);
+     this.timer = window.setTimeout(this.oneSecondPassed.bind(this), 1000);
    }
    oneSecondPassed() {
      this.setState({time: this.state.time + 1});
-     window.setTimeout(this.oneSecondPassed.bind(this), 1000);
+     if(this.state.time !== this.max) {
+       this.timer = window.setTimeout(this.oneSecondPassed.bind(this), 1000);
+     }
    }
 
    componentDidUpdate() {
      this.paintRing(this.state.time * 360 / this.max);
+   }
+
+   toggleTimer() {
+     if (!this.timer && this.state.time !== this.max) {
+       this.timer = window.setTimeout(this.oneSecondPassed.bind(this), 500);
+     }
+     else {
+       window.clearTimeout(this.timer);
+       this.timer = null;
+     }
    }
 
    render() {
@@ -36,7 +48,7 @@ import leftPad from '../left-pad.util.js';
          <div className='current-activity__activity-name'>Running</div>
          <div className='current-activity__timer'>{this.state.time !== this.max ? timer : 'Koniec'}</div>
          <div className='current-activity__controls'>
-           <button>P</button>
+           <button onClick={() => this.toggleTimer()}>P</button>
            <button>S</button>
          </div>
          <canvas className='current-activity__canvas' width='400' height='400' ref={(el) => this._canvas = el} ></canvas>
