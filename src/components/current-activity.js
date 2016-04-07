@@ -41,21 +41,35 @@ import leftPad from '../left-pad.util.js';
    }
 
    render() {
-     const timer = `${Math.floor(this.state.time / 60)}:${leftPad(this.state.time % 60, 2, "0")}`;
-
+     const timer = `${Math.floor(this.state.time / 60)}:${leftPad(this.state.time % 60, 2, '0')}`;
+     const hasActivityEnded = this.state.time === this.max;
      return (
-       <div className='current-activity'>
-         <div className='current-activity__activity-name'>Running</div>
-         <div className='current-activity__timer'>{this.state.time !== this.max ? timer : 'Koniec'}</div>
-         <div className='current-activity__controls'>
+           <div className='current-activity'>
+             <div className='current-activity__activity-name'>Running</div>
+             <div className='current-activity__timer'>
+               { !hasActivityEnded ? timer : 'Koniec'}
+             </div>
+             {this.renderControls(hasActivityEnded)}
+             <canvas className='current-activity__canvas'
+                     width='400'
+                     height='400'
+                     ref={(el) => this._canvas = el} >
+
+             </canvas>
+           </div>
+     );
+   }
+   renderControls(hasActivityEnded) {
+     if(hasActivityEnded) {
+       return;
+     }
+     return(
+          <div className='current-activity__controls'>
            <button onClick={() => this.toggleTimer()}>P</button>
            <button>S</button>
          </div>
-         <canvas className='current-activity__canvas' width='400' height='400' ref={(el) => this._canvas = el} ></canvas>
-       </div>
      );
    }
-
 
 
    paintRing(degrees) {
@@ -87,4 +101,4 @@ import leftPad from '../left-pad.util.js';
 
 function radians(degrees) {
   return degrees * Math.PI / 180;
-};
+}
