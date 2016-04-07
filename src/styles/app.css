@@ -55,9 +55,17 @@ body {
   padding: 64px 32px 20px;
   margin: 0 auto;
   background-color: #fff;
-  min-height: 500px;
+  min-height: 600px;
   overflow: auto;
 }
+
+.choose-activity{
+  margin-top: 200px;
+  text-align: center;
+  color: #6CD5FA;
+  font-size: 32px;
+}
+
 .choose-activity-list{
   list-style: none;
   margin: 0 0 30px;

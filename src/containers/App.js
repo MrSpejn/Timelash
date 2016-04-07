@@ -7,26 +7,31 @@ import CurrentActivity from '../components/current-activity';
 
 const activities = [
   {
+    'id': '_f1',
     'name': 'Sport',
     'time': 0,
     'checkpoint': 10
   },
   {
+    'id': '_f2',
     'name': 'House',
     'time': 0,
     'checkpoint': 120
   },
   {
+    'id': '_f3',
     'name': 'Work',
     'time': 0,
     'checkpoint': 60
   },
   {
+    'id': '_f4',
     'name': 'Learning',
     'time': 0,
     'checkpoint': 30
   },
   {
+    'id': '_f5',
     'name': 'Meeting',
     'time': 0,
     'checkpoint': 15
@@ -40,14 +45,15 @@ class App extends Component {
     this.props.startActivity(activities[0]);
   }
   startActivityIfPossible(activity) {
-    if (!this.props.activity) {
+    const current = this.props.activity;
+    if (!current || current.time === current.checkpoint) {
       this.props.startActivity(activity);
     }
   }
   render() {
     const activitiesNodes = activities.map((act, i) => {
       return (
-        <li onClick={() => { this.startActivityIfPossible(activities[i]) }}>
+        <li key={act.id} onClick={() => { this.startActivityIfPossible(activities[i]) }}>
           {act.name}
         </li>
       );
@@ -58,7 +64,7 @@ class App extends Component {
         <ul className='choose-activity-list'>
           {activitiesNodes}
         </ul>
-        {this.props.activity ? <CurrentActivity /> : ''}
+        {this.props.activity ? <CurrentActivity /> : <h3 className="choose-activity">Choose activity</h3>}
 
       </div>
     );
