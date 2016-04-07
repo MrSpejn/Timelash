@@ -1,4 +1,4 @@
-import {CHANGE_ACTIVITY_TIME, START_ACTIVITY} from './types';
+import {CHANGE_ACTIVITY_TIME, START_ACTIVITY, END_ACTIVITY} from './types';
 
 export function changeActivityTime(time) {
   return {
@@ -11,5 +11,11 @@ export function startActivity(activity) {
   return {
     type: START_ACTIVITY,
     payload: activity
+  }
+}
+
+export function endActivity() {
+  return {
+    type: END_ACTIVITY
   }
 }

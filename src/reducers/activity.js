@@ -11,8 +11,8 @@ export default function activityReducer(state = {}, action) {
          time: action.payload
       };
 
-    case START_ACTIVITY: {
-        return {};
+    case END_ACTIVITY: {
+        return null;
     }
     default:
       return state;

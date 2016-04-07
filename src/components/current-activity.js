@@ -2,7 +2,7 @@ import React, {Component}        from 'react';
 import {connect}                 from 'react-redux';
 import {bindActionCreators}      from 'redux';
 
-import {changeActivityTime}      from '../actions/index';
+import {changeActivityTime, endActivity}      from '../actions/index';
 import leftPad                   from '../left-pad.util';
 import Timer                     from '../timer.util';
 import CanvasTimeProgress        from '../components/canvas-time-progress';
@@ -22,7 +22,12 @@ class CurrentActivity extends Component{
      }
    }
 
-   toggleTimer() {
+   endActivity() {
+     this.timer.pause();
+     this.props.endActivity();
+   }
+
+   pauseActivity() {
      const activity = this.props.activity;
      if (this.timer.paused && activity.time  !== activity.checkpoint) {
        this.timer.start();
@@ -53,8 +58,8 @@ class CurrentActivity extends Component{
      }
      return(
           <div className='current-activity__controls'>
-           <button onClick={() => this.toggleTimer()}>P</button>
-           <button>S</button>
+           <button onClick={() => this.pauseActivity()}>P</button>
+           <button onClick={() => this.endActivity()}>S</button>
          </div>
      );
    }
@@ -67,7 +72,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({changeActivityTime}, dispatch);
+  return bindActionCreators({changeActivityTime, endActivity}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CurrentActivity);
