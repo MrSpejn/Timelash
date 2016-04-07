@@ -2,9 +2,9 @@ import React, { Component} from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import {startActivity} from '../actions/index';
+import {startProgress} from '../actions/index';
 import CurrentActivity from '../components/current-activity';
-
+import DoneActivitiesList from '../components/done-activities-list';
 const activities = [
   {
     'id': '_f1',
@@ -40,20 +40,26 @@ const activities = [
 ];
 
 class App extends Component {
-  componentWillMount() {
-
-    this.props.startActivity(activities[0]);
-  }
-  startActivityIfPossible(activity) {
-    const current = this.props.activity;
+  startProgressIfPossible(progress) {
+    const current = this.props.progress;
     if (!current || current.time === current.checkpoint) {
-      this.props.startActivity(activity);
+      this.props.startProgress(progress);
     }
   }
+
+  renderCurrentActivity() {
+    if (this.props.progress) {
+      return <CurrentActivity />;
+    }
+    else {
+      return <h3 className="choose-activity">Choose activity</h3>;
+    }
+  }
+
   render() {
     const activitiesNodes = activities.map((act, i) => {
       return (
-        <li key={act.id} onClick={() => { this.startActivityIfPossible(activities[i]) }}>
+        <li key={act.id} onClick={() => { this.startProgressIfPossible(activities[i]) }}>
           {act.name}
         </li>
       );
@@ -64,20 +70,29 @@ class App extends Component {
         <ul className='choose-activity-list'>
           {activitiesNodes}
         </ul>
-        {this.props.activity ? <CurrentActivity /> : <h3 className="choose-activity">Choose activity</h3>}
-
+        <div className="done-activties-wrapper">
+          <DoneActivitiesList activities={this.props.activities}/>
+        </div>
+        <div className="current-activity-wrapper">
+          {this.renderCurrentActivity()}
+        </div>
       </div>
     );
   }
 }
+
+
+
+
 function mapStateToProps(state) {
   return {
-    activity: state.activity
+    activities: state.activities,
+    progress: state.progress
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({startActivity}, dispatch);
+  return bindActionCreators({startProgress}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

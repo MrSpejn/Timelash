@@ -1,19 +1,11 @@
-import {END_ACTIVITY, CHANGE_ACTIVITY_TIME, START_ACTIVITY} from '../actions/types';
+import {ADD_ACTIVITY} from '../actions/types';
 
-export default function activityReducer(state = {}, action) {
+export default function activitesReducer(state = [], action) {
   switch (action.type) {
-    case START_ACTIVITY:
-      return action.payload;
+    case ADD_ACTIVITY:
+      console.log("REDUCER", [...state, action.payload]);
+      return [...state, action.payload];
 
-    case CHANGE_ACTIVITY_TIME:
-      return {
-         ...state,
-         time: action.payload
-      };
-
-    case END_ACTIVITY: {
-        return null;
-    }
     default:
       return state;
   }

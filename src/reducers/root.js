@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
+import progressReducer from './progress';
 import activityReducer from './activity';
 
 const rootReducer = combineReducers({
-  activity: activityReducer
+  activities: activityReducer,
+  progress: progressReducer,
 });
 
 export default rootReducer;

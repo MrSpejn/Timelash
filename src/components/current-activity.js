@@ -2,7 +2,9 @@ import React, {Component}        from 'react';
 import {connect}                 from 'react-redux';
 import {bindActionCreators}      from 'redux';
 
-import {changeActivityTime, endActivity}      from '../actions/index';
+import {changeProgressTime,
+        endProgress,
+        addActivity}             from '../actions/index';
 import leftPad                   from '../left-pad.util';
 import Timer                     from '../timer.util';
 import CanvasTimeProgress        from '../components/canvas-time-progress';
@@ -15,21 +17,26 @@ class CurrentActivity extends Component{
    }
 
    oneSecondPassed() {
-     const activity = this.props.activity;
+     const progress = this.props.progress;
 
-     if(activity.time  !== activity.checkpoint) {
-       this.props.changeActivityTime(activity.time + 1);
+     if(progress.time  !== progress.checkpoint) {
+       this.props.changeProgressTime(progress.time + 1);
+     }
+     else {
+       this.timer.pause();
+       this.props.addActivity(this.props.progress);
      }
    }
 
-   endActivity() {
+   endProgress() {
      this.timer.pause();
-     this.props.endActivity();
+     this.props.endProgress();
+     this.props.addActivity(this.props.progress);
    }
 
-   pauseActivity() {
-     const activity = this.props.activity;
-     if (this.timer.paused && activity.time  !== activity.checkpoint) {
+   pauseProgress() {
+     const progress = this.props.progress;
+     if (this.timer.paused && progress.time  !== progress.checkpoint) {
        this.timer.start();
      }
      else {
@@ -38,28 +45,28 @@ class CurrentActivity extends Component{
    }
 
    render() {
-     const activity = this.props.activity;
-     const time = `${Math.floor(activity.time / 60)}:${leftPad(activity.time % 60, 2, '0')}`;
-     const hasActivityEnded = activity.time === activity.checkpoint;
+     const progress = this.props.progress;
+     const time = `${Math.floor(progress.time / 60)}:${leftPad(progress.time % 60, 2, '0')}`;
+     const hasProgressEnded = progress.time === progress.checkpoint;
      return (
            <div className='current-activity'>
-             <div className='current-activity__activity-name'>{activity.name}</div>
+             <div className='current-activity__activity-name'>{progress.name}</div>
              <div className='current-activity__timer'>
-               { !hasActivityEnded ? time : 'Koniec'}
+               { !hasProgressEnded ? time : 'Koniec'}
              </div>
-             {this.renderControls(hasActivityEnded)}
-             <CanvasTimeProgress currentValue={activity.time} maxValue={activity.checkpoint} />
+             {this.renderControls(hasProgressEnded)}
+             <CanvasTimeProgress currentValue={progress.time} maxValue={progress.checkpoint} />
            </div>
      );
    }
-   renderControls(hasActivityEnded) {
-     if(hasActivityEnded) {
+   renderControls(hasProgressEnded) {
+     if(hasProgressEnded) {
        return;
      }
      return(
           <div className='current-activity__controls'>
-           <button onClick={() => this.pauseActivity()}>P</button>
-           <button onClick={() => this.endActivity()}>S</button>
+           <button onClick={() => this.pauseProgress()}>P</button>
+           <button onClick={() => this.endProgress()}>S</button>
          </div>
      );
    }
@@ -67,12 +74,12 @@ class CurrentActivity extends Component{
 
 function mapStateToProps(state) {
   return {
-    activity: state.activity
+    progress: state.progress
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({changeActivityTime, endActivity}, dispatch);
+  return bindActionCreators({changeProgressTime, endProgress, addActivity}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CurrentActivity);

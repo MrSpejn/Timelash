@@ -1,21 +1,29 @@
-import {CHANGE_ACTIVITY_TIME, START_ACTIVITY, END_ACTIVITY} from './types';
+import {CHANGE_PROGRESS_TIME, START_PROGRESS, END_PROGRESS} from './types';
+import {ADD_ACTIVITY} from './types';
 
-export function changeActivityTime(time) {
+export function changeProgressTime(time) {
   return {
-    type: CHANGE_ACTIVITY_TIME,
+    type: CHANGE_PROGRESS_TIME,
     payload: time
   };
 }
 
-export function startActivity(activity) {
+export function startProgress(progress) {
   return {
-    type: START_ACTIVITY,
-    payload: activity
+    type: START_PROGRESS,
+    payload: progress
   }
 }
 
-export function endActivity() {
+export function endProgress() {
   return {
-    type: END_ACTIVITY
+    type: END_PROGRESS
+  }
+}
+
+export function addActivity(activity) {
+  return {
+    type: ADD_ACTIVITY,
+    payload: activity
   }
 }
