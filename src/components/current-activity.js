@@ -1,37 +1,41 @@
-import React, {Component} from 'react';
+import React, {Component}        from 'react';
+import {connect}                 from 'react-redux';
+import {bindActionCreators}      from 'redux';
 
+import {changeActivityTime}      from '../actions/index';
 import {setShadow, strokeCircle} from '../canvas.util.js';
-import leftPad from '../left-pad.util.js';
+import leftPad                   from '../left-pad.util.js';
 
- export default class CurrentActivity extends Component{
-   constructor() {
-     super();
-     this.state = {time: 0};
-     this.max = 10;
-   }
+class CurrentActivity extends Component{
 
    componentDidMount() {
      const ctx = this._canvas.getContext('2d');
+     const activity = this.props.activity;
+
      ctx.setShadow = setShadow;
      ctx.strokeCircle = strokeCircle;
      this.context = ctx;
 
-     this.paintRing(this.state.time * 360 / this.max);
+     this.paintRing(activity.time * 360 / activity.checkpoint);
      this.timer = window.setTimeout(this.oneSecondPassed.bind(this), 1000);
    }
    oneSecondPassed() {
-     this.setState({time: this.state.time + 1});
-     if(this.state.time !== this.max) {
+     const activity = this.props.activity;
+
+     if(activity.time  !== activity.checkpoint) {
+       this.props.changeActivityTime(activity.time + 1);
        this.timer = window.setTimeout(this.oneSecondPassed.bind(this), 1000);
      }
    }
 
    componentDidUpdate() {
-     this.paintRing(this.state.time * 360 / this.max);
+     const activity = this.props.activity;
+     this.paintRing(activity.time * 360 / activity.checkpoint);
    }
 
    toggleTimer() {
-     if (!this.timer && this.state.time !== this.max) {
+     const activity = this.props.activity;
+     if (!this.timer && activity.time  !== activity.checkpoint) {
        this.timer = window.setTimeout(this.oneSecondPassed.bind(this), 500);
      }
      else {
@@ -41,13 +45,14 @@ import leftPad from '../left-pad.util.js';
    }
 
    render() {
-     const timer = `${Math.floor(this.state.time / 60)}:${leftPad(this.state.time % 60, 2, '0')}`;
-     const hasActivityEnded = this.state.time === this.max;
+     const activity = this.props.activity;
+     const time = `${Math.floor(activity.time / 60)}:${leftPad(activity.time % 60, 2, '0')}`;
+     const hasActivityEnded = activity.time === activity.checkpoint;
      return (
            <div className='current-activity'>
-             <div className='current-activity__activity-name'>Running</div>
+             <div className='current-activity__activity-name'>{activity.name}</div>
              <div className='current-activity__timer'>
-               { !hasActivityEnded ? timer : 'Koniec'}
+               { !hasActivityEnded ? time : 'Koniec'}
              </div>
              {this.renderControls(hasActivityEnded)}
              <canvas className='current-activity__canvas'
@@ -102,3 +107,15 @@ import leftPad from '../left-pad.util.js';
 function radians(degrees) {
   return degrees * Math.PI / 180;
 }
+
+function mapStateToProps(state) {
+  return {
+    activity: state.activity
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({changeActivityTime}, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CurrentActivity);

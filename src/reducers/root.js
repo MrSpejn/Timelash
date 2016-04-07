@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import activityReducer from './activity';
 
 const rootReducer = combineReducers({
-  currentActivity: activityReducer,
+  activity: activityReducer,
 });
 
 export default rootReducer;

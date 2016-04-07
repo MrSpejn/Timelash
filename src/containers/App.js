@@ -2,15 +2,18 @@ import React, { Component} from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import {startActivity} from '../actions/index';
 import CurrentActivity from '../components/current-activity';
 
-const currentActivity = {
-  'name': 'Running',
-  'time': 0,
-  'checkpoint': 120
-};
-
 class App extends Component {
+  componentWillMount() {
+    const startingActivity = {
+      'name': 'Running',
+      'time': 0,
+      'checkpoint': 10
+    };
+    this.props.startActivity(startingActivity);
+  }
   render() {
     return  (
       <div className='app'>
@@ -21,12 +24,20 @@ class App extends Component {
           <li>Work</li>
           <li>Sport</li>
         </ul>
-        <CurrentActivity activity={currentActivity} />
+        {this.props.activity ? <CurrentActivity /> : ''}z
+
       </div>
     );
   }
 }
+function mapStateToProps(state) {
+  return {
+    activity: state.activity
+  };
+}
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({startActivity}, dispatch);
+}
 
-
-export default connect(null, null)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
