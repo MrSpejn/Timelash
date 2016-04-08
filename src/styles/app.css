@@ -75,22 +75,46 @@ body {
   color: #c2c2c2;
   text-align: center;
 }
-.choose-activity-list li{
+.choose-activity-list > li{
   background-color: #3cc4f2;
   font-size: 18px;
   color: #fff;
   width: 150px;
-  height: 50px;
+  height: 36px;
   display: inline-block;
   text-align: center;
-  line-height: 50px;
+  line-height: 36px;
   cursor: pointer;
+  position: relative;
 }
-.choose-activity-list li:hover{
+.choose-activity-list > li:hover {
   background-color: #08a7de;
 }
+.choose-activity-list > li:hover ul{
+  display: block;
+}
+.choose-activity-list > li ul {
+  text-align: left;
+  font-size: 16px;
+  line-height: 30px;
 
-.choose-activity-list li:not(:first-child) {
+  color: #1C232C;
+  position: absolute;
+  padding: 0;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  list-style: none;
+  display: none;
+}
+.choose-activity-list > li ul li{
+  padding-left: 10px;
+}
+.choose-activity-list > li ul li:hover{
+  background-color: #d9d9d9;
+}
+
+.choose-activity-list > li:not(:first-child) {
   margin-left: 12px;
 }
 
