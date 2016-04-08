@@ -15,16 +15,26 @@ class CurrentActivity extends Component{
      this.timer = new Timer(this.oneSecondPassed.bind(this), 1000);
      this.timer.start();
    }
+   componentDidUpdate() {
+     if (this.props.progress.time === 0) {
+       this.timer = new Timer(this.oneSecondPassed.bind(this), 1000);
+       this.timer.start();
+     }
+     if (this.props.progress.time === this.props.progress.checkpoint) {
+       this.timer.pause();
+       this.props.addActivity(this.props.progress);
 
+       var options = {
+          icon: 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/clock-icon.png'
+       };
+       new Notification("Your activity has ended", options);
+     }
+   }
    oneSecondPassed() {
      const progress = this.props.progress;
 
      if(progress.time  !== progress.checkpoint) {
        this.props.changeProgressTime(progress.time + 1);
-     }
-     else {
-       this.timer.pause();
-       this.props.addActivity(this.props.progress);
      }
    }
 
@@ -46,8 +56,11 @@ class CurrentActivity extends Component{
 
    render() {
      const progress = this.props.progress;
-     const time = `${Math.floor(progress.time / 60)}:${leftPad(progress.time % 60, 2, '0')}`;
+     const time = `${leftPad(Math.floor(progress.time / 60), 2, '0')}:${leftPad(progress.time % 60, 2, '0')}`;
      const hasProgressEnded = progress.time === progress.checkpoint;
+
+
+
      return (
            <div className='current-activity'>
              <div className='current-activity__activity-name'>{progress.name}</div>

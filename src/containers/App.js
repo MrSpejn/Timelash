@@ -40,6 +40,11 @@ const activities = [
 ];
 
 class App extends Component {
+  componentDidMount() {
+    if (Notification.permission !== 'granted') {
+      Notification.requestPermission();
+    }
+  }
   startProgressIfPossible(progress) {
     const current = this.props.progress;
     if (!current || current.time === current.checkpoint) {
