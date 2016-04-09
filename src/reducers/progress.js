@@ -3,7 +3,10 @@ import {END_PROGRESS, CHANGE_PROGRESS_TIME, START_PROGRESS} from '../actions/typ
 export default function progressReducer(state = null, action) {
   switch (action.type) {
     case START_PROGRESS:
-      return action.payload;
+      return {
+        time: 0,
+        ...action.payload
+      }
 
     case CHANGE_PROGRESS_TIME:
       return {

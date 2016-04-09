@@ -3,8 +3,9 @@ import {connect}                 from 'react-redux';
 import {bindActionCreators}      from 'redux';
 
 import categories                from '../categories';
+import {startProgress}           from '../actions/index';
 
-export default class ChooseActivityList extends Component {
+class ChooseActivityList extends Component {
   render() {
     return (
       <ul className='choose-activity-list'>
@@ -16,7 +17,7 @@ export default class ChooseActivityList extends Component {
   renderCategories() {
     return categories.map((cat) => {
       return (
-        <li key={cat.id} onClick={() => { this.startProgressIfPossible(cat) }}>
+        <li key={cat.id}>
           {cat.name}
           <ul>
             {this.renderItems(cat)}
@@ -29,7 +30,7 @@ export default class ChooseActivityList extends Component {
   renderItems(category) {
     return category.items.map((act) => {
       return (
-        <li key={act.id}>
+        <li key={act.id} onClick={() => { this.startProgressIfPossible(act) }}>
           {act.name}
         </li>
       );
@@ -43,3 +44,9 @@ export default class ChooseActivityList extends Component {
     }
   }
 }
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({startProgress}, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(ChooseActivityList);

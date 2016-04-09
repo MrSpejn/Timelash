@@ -1,0 +1,89 @@
+.current-activity {
+  width: 400px;
+  height: 400px;
+  color: #6CD5FA;
+  background-color: #6CD5FA;
+  border-radius: 100%;
+  margin: 0 auto;
+  position: relative;
+  box-shadow: inset 5px 5px 2px #3daed3;
+
+}
+
+.current-activity__timer{
+  position: absolute;
+  z-index: 11;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+  left: 0;
+  font-size: 56px;
+  width: 100%;
+}
+
+.current-activity__activity-name{
+  position: absolute;
+  z-index: 11;
+  top: 100px;
+  width: 100%;
+  text-align: center;
+  left: 0;
+  color: #08a7de;
+  font-size: 32px;
+}
+
+.current-activity__controls{
+  width: 100%;
+  position: absolute;
+  z-index: 11;
+  top: 260px;
+  text-align: center;
+  left: 0;
+
+}
+.current-activity__controls button{
+  background-color: #3CC4F2;
+  color: #fff;
+  border: none;
+  font-size: 28px;
+  margin: 0 6px;
+  cursor: pointer;
+}
+.current-activity__controls button:focus{
+  outline: none;
+}
+.current-activity__controls button:hover{
+  background-color: #08a7de;
+}
+
+.current-activity__canvas {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 400px;
+
+  border-radius: 50%;
+}
+.current-activity::before, .current-activity::after{
+
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  content: '';
+  top: 30px;
+  left: 30px;
+  width: 340px;
+  height: 340px;
+
+}
+
+.current-activity::before{
+  z-index: 10;
+}
+
+.current-activity::after{
+  z-index: 1;
+  box-shadow: 5px 5px 2px #3daed3;
+}
