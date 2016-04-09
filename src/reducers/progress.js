@@ -1,10 +1,12 @@
 import {END_PROGRESS, CHANGE_PROGRESS_TIME, START_PROGRESS} from '../actions/types';
+import moment from 'moment';
 
 export default function progressReducer(state = null, action) {
   switch (action.type) {
     case START_PROGRESS:
       return {
         time: 0,
+        date: moment(),
         ...action.payload
       }
 

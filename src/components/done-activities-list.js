@@ -6,6 +6,7 @@ export default class DoneActivitiesList extends Component {
     const activities = this.props.activities.map((act, i) => {
       return (
         <li key={i}>
+          <em className="date">{act.date.format('hh:mmA')} </em> 
           {act.name}
           <span className="hours">
             {`${Math.floor(act.time / 60)}:${leftPad(act.time % 60, 2, '0')}`}
