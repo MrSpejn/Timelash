@@ -13,8 +13,18 @@ class CurrentActivity extends Component{
 
    componentDidMount() {
      this.timer = new Timer(this.oneSecondPassed.bind(this), 1000);
-     this.timer.start();
+
+     if (this.props.progress.time != this.props.progress.checkpoint) {
+       this.timer.start();
+
+     }
+     window.onbeforeunload = () => {
+       if (this.props.progress && this.props.progress.name) {
+         localStorage.setItem('currentActivity', JSON.stringify(this.props.progress));
+       }
+     };
    }
+
    componentDidUpdate() {
      if (this.props.progress.time === 0) {
        this.timer = new Timer(this.oneSecondPassed.bind(this), 1000);
