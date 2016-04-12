@@ -6,12 +6,11 @@ import categories                from '../categories';
 import {startProgress}           from '../actions/index';
 
 class ChooseActivityList extends Component {
-  render() {
-    return (
-      <ul className='choose-activity-list'>
-        {this.renderCategories()}
-      </ul>
-    );
+  startProgressIfPossible(progress) {
+    const current = this.props.progress;
+    if (!current || current.time === current.checkpoint) {
+      this.props.startProgress(progress);
+    }
   }
 
   renderCategories() {
@@ -37,11 +36,12 @@ class ChooseActivityList extends Component {
     });
   }
 
-  startProgressIfPossible(progress) {
-    const current = this.props.progress;
-    if (!current || current.time === current.checkpoint) {
-      this.props.startProgress(progress);
-    }
+  render() {
+    return (
+      <ul className='choose-activity-list'>
+        {this.renderCategories()}
+      </ul>
+    );
   }
 }
 
