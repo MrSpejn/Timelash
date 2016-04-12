@@ -14,12 +14,12 @@ const categories = [
         'checkpoint': 12
       },
       {
-        'id': '_fa2',
+        'id': '_fa3',
         'name': 'Football',
         'checkpoint': 15
       },
       {
-        'id': '_fa2',
+        'id': '_fa4',
         'name': 'Training',
         'checkpoint': 1800
       }
@@ -30,12 +30,12 @@ const categories = [
     'name': 'House',
     'items': [
       {
-        'id': '_fa3',
+        'id': '_fa5',
         'name': 'Wash dishes',
         'checkpoint': 21
       },
       {
-        'id': '_fa4',
+        'id': '_fa6',
         'name': 'Prepare dinner',
         'checkpoint': 15
       }
@@ -46,7 +46,7 @@ const categories = [
     'name': 'Work',
     'items': [
       {
-        'id': '_fa5',
+        'id': '_fa7',
         'name': 'Project ICT',
         'checkpoint': 30
       }
@@ -57,17 +57,17 @@ const categories = [
     'name': 'Learning',
     'items': [
       {
-        'id': '_fa6',
+        'id': '_fa8',
         'name': 'Handwriting',
         'checkpoint': 1200
       },
       {
-        'id': '_fa7',
+        'id': '_fa9',
         'name': 'Speed Typing',
         'checkpoint': 900,
       },
       {
-        'id': '_fa8',
+        'id': '_fa10',
         'name': 'Reading',
         'checkpoint': 900,
       },
@@ -78,12 +78,12 @@ const categories = [
     'name': 'Meeting',
     'items': [
       {
-        'id': '_fa9',
+        'id': '_fa11',
         'name': 'Patryk',
         'checkpoint': 900,
       },
       {
-        'id': '_fa10',
+        'id': '_fa12',
         'name': 'Angie',
         'checkpoint': 1800,
       },
