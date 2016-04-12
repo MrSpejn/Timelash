@@ -33,27 +33,28 @@ class CurrentActivity extends Component{
 
   componentWillUpdate(prevProps, prevState) {
     if (prevProps.progress != this.props.progress) {
-      this.setState({'time': 0});
-      this.timer = new Timer(this.oneSecondPassed.bind(this), 1000);
-      this.timer.start();
+      this.progressHasChanged();
     }
 
     else if (this.state.time === this.props.progress.checkpoint) {
-      this.timer.pause();
-      this.notify();
-      const story = this.props.progress;
-      story.time = this.state.time;
-      this.props.addToHistory(story);
+      this.progressReachedCheckpoint();
     }
-
   }
-  endTaskEarlier() {
+
+  progressReachedCheckpoint() {
+    this.timer.pause();
+    this.notify();
     const story = this.props.progress;
     story.time = this.state.time;
     this.props.addToHistory(story);
-    this.props.endProgress();
   }
 
+  progressHasChanged() {
+    this.setState({'time': 0});
+    this.timer = new Timer(this.oneSecondPassed.bind(this), 1000);
+    this.timer.start();
+  }
+  
   notify() {
     const options = {
       icon: 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/clock-icon.png',
@@ -79,6 +80,12 @@ class CurrentActivity extends Component{
                                status={hasProgressEnded} />
         </div>
     );
+  }
+  endTaskEarlier() {
+    const story = this.props.progress;
+    story.time = this.state.time;
+    this.props.addToHistory(story);
+    this.props.endProgress();
   }
 }
 
