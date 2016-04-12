@@ -2,9 +2,12 @@ export default class Timer {
   constructor(action, tickTime) {
     this.action = action;
     this.tickTime = tickTime;
+    this.paused = true;
   }
   start() {
-    this._timer = setTimeout(this._tick.bind(this), this.tickTime);
+    if (this.paused) {
+      this._timer = setTimeout(this._tick.bind(this), this.tickTime);
+    }
     this.paused = false;
   }
   pause() {
