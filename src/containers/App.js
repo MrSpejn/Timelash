@@ -1,35 +1,24 @@
-import React, { Component}      from 'react';
-import { bindActionCreators }   from 'redux';
-import { connect }              from 'react-redux';
-import moment                   from 'moment';
+import React, { Component}        from 'react';
+import { bindActionCreators }     from 'redux';
+import { connect }                from 'react-redux';
 
-import CurrentActivity          from '../components/current-activity';
-import DoneActivitiesList       from '../components/done-activities-list';
-import ChooseActivityList       from '../components/choose-activity-list';
-import {startProgress,
-        addActivity}            from '../actions/index';
+import CurrentActivity            from '../containers/current-activity';
+import ChooseActivityList         from '../containers/choose-activity-list';
+
+import DoneActivitiesList         from '../components/done-activities-list';
+
+import {fetchUnfinishedProgress}  from '../actions/index';
+import {fetchHistory}             from '../actions/history';
+
 
 class App extends Component {
   componentDidMount() {
     if (Notification.permission !== 'granted') {
       Notification.requestPermission();
     }
-    const taskInStorage = JSON.parse(localStorage.getItem('currentActivity'));
 
-    if (taskInStorage) {
-      taskInStorage.date = moment(taskInStorage.date);
-      const sec = (moment().valueOf() - taskInStorage.date.valueOf()) / 1000;
-
-      if (sec > taskInStorage.checkpoint) {
-        taskInStorage.time = taskInStorage.checkpoint;
-        this.props.startProgress(taskInStorage);
-        this.props.addActivity(taskInStorage);
-      }
-      else {
-        taskInStorage.time = Math.round(sec);
-        this.props.startProgress(taskInStorage);
-      }
-    }
+    this.props.fetchHistory();
+    //this.props.fetchUnfinishedProgress();
   }
 
   render() {
@@ -46,7 +35,7 @@ class App extends Component {
       <div className='app'>
         <ChooseActivityList />
         <div className="done-activties-wrapper">
-          <DoneActivitiesList activities={this.props.activities}/>
+          <DoneActivitiesList activities={this.props.history}/>
         </div>
         <div className="current-activity-wrapper">
           {currentActivity}
@@ -61,11 +50,11 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    activities: state.activities,
+    history: state.history,
     progress: state.progress
   };
 }
 
 
 
-export default connect(mapStateToProps, {startProgress, addActivity})(App);
+export default connect(mapStateToProps, {fetchHistory, fetchUnfinishedProgress})(App);
