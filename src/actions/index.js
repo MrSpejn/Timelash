@@ -1,5 +1,6 @@
-import {CHANGE_PROGRESS_TIME, START_PROGRESS, END_PROGRESS} from './types';
-import {ADD_ACTIVITY} from './types';
+import moment from 'moment';
+
+import {CHANGE_PROGRESS_TIME, START_PROGRESS, END_PROGRESS, FETCH_UNFINISHED_PROGRESS} from './types';
 
 export function changeProgressTime(time) {
   return {
@@ -21,9 +22,24 @@ export function endProgress() {
   }
 }
 
-export function addActivity(activity) {
+export function fetchUnfinishedProgress() {
+  const taskInStorage = JSON.parse(localStorage.getItem('currentActivity'));
+  console.log("fetchUnfinishedProgress");
+
+  if (taskInStorage) {
+    taskInStorage.date = moment(taskInStorage.date);
+    const sec = (moment().valueOf() - taskInStorage.date.valueOf()) / 1000;
+
+    if (sec > taskInStorage.checkpoint) {
+      taskInStorage.time = taskInStorage.checkpoint;
+    }
+    else {
+      taskInStorage.time = Math.round(sec);
+    }
+  }
+
   return {
-    type: ADD_ACTIVITY,
-    payload: activity
+    type: FETCH_UNFINISHED_PROGRESS,
+    payload: taskInStorage
   }
 }

@@ -1,4 +1,4 @@
-import {END_PROGRESS, CHANGE_PROGRESS_TIME, START_PROGRESS} from '../actions/types';
+import {END_PROGRESS, CHANGE_PROGRESS_TIME, START_PROGRESS, FETCH_UNFINISHED_PROGRESS} from '../actions/types';
 import moment from 'moment';
 
 export default function progressReducer(state = null, action) {
@@ -17,7 +17,13 @@ export default function progressReducer(state = null, action) {
       };
 
     case END_PROGRESS: {
-        return null;
+      return null;
+    }
+
+    case FETCH_UNFINISHED_PROGRESS: {
+      return {
+        ...action.payload
+      }
     }
     default:
       return state;
