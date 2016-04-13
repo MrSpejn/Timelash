@@ -18,12 +18,14 @@ export function startProgress(progress) {
 
 export function endProgress() {
   return {
-    type: END_PROGRESS
+    type: END_PROGRESS,
+    payload: null
   }
 }
 
 export function fetchUnfinishedProgress() {
   const taskInStorage = JSON.parse(localStorage.getItem('currentActivity'));
+  localStorage.setItem('currentActivity', null);
 
   if (taskInStorage) {
     taskInStorage.date = moment(taskInStorage.date);
