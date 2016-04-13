@@ -4,7 +4,7 @@ import historyReducer from './history';
 
 const rootReducer = combineReducers({
   history: historyReducer,
-  progress: progressReducer,
+  progress: progressReducer
 });
 
 export default rootReducer;

@@ -71,9 +71,9 @@ class CurrentActivity extends Component{
 
   notify() {
     const options = {
-      icon: 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/clock-icon.png',
+      icon: 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/clock-icon.png'
     };
-    new Notification("Your activity has ended", options);
+    new Notification('Your activity has ended', options);
   }
 
   render() {
