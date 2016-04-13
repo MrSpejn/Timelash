@@ -16,6 +16,13 @@ class CurrentActivity extends Component{
   constructor() {
     super();
     this.state = {'time': 0};
+    window.onbeforeunload = () => {
+      if (this.props.progress && this.props.progress.name) {
+        const progress = this.props.progress;
+        progress.time = this.state.time;
+        localStorage.setItem('currentActivity', JSON.stringify(progress));
+      }
+    }
   }
 
   oneSecondPassed() {
@@ -26,12 +33,13 @@ class CurrentActivity extends Component{
     this.timer = new Timer(this.oneSecondPassed.bind(this), 1000);
     this.setState({'time': this.props.progress.time});
 
+    console.log(this.state.time);
     if (this.state.time !== this.props.progress.checkpoint) {
       this.timer.start();
     }
   }
 
-  componentWillUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps, prevState) {
     if (prevProps.progress != this.props.progress) {
       this.progressHasChanged();
     }
@@ -54,7 +62,7 @@ class CurrentActivity extends Component{
     this.timer = new Timer(this.oneSecondPassed.bind(this), 1000);
     this.timer.start();
   }
-  
+
   notify() {
     const options = {
       icon: 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/clock-icon.png',
@@ -76,7 +84,7 @@ class CurrentActivity extends Component{
              <CanvasTimeProgress currentValue={this.state.time}
                                  maxValue={progress.checkpoint} />
              <ProgressControls timer={this.timer}
-                               onStop={endTaskEarlier}
+                               onStop={() => this.endTaskEarlier()}
                                status={hasProgressEnded} />
         </div>
     );
@@ -89,13 +97,6 @@ class CurrentActivity extends Component{
   }
 }
 
-//  setupOnuloadDataExtraction() {
-//     window.onbeforeunload = () => {
-//       if (this.props.progress && this.props.progress.name) {
-//         localStorage.setItem('currentActivity', JSON.stringify(this.props.progress));
-//       }
-//     }
-//  }
 
 function mapStateToProps(state) {
   return {

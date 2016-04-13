@@ -12,16 +12,25 @@ import {fetchHistory}             from '../actions/history';
 
 
 class App extends Component {
-  componentDidMount() {
+  componentWillMount() {
+    console.debug('APP: Will mount', this.props);
     if (Notification.permission !== 'granted') {
       Notification.requestPermission();
     }
+    this.props.fetchUnfinishedProgress();
+  }
+  componentDidMount() {
+    console.debug('APP: Did mount', this.props);
+    //this.props.fetchHistory();
+  }
 
-    this.props.fetchHistory();
-    //this.props.fetchUnfinishedProgress();
+  componentWillReceiveProps(props) {
+    console.debug('APP: Will receive props', props);
   }
 
   render() {
+    console.debug('APP: Render', this.props);
+
     let currentActivity;
 
     if (this.props.progress) {

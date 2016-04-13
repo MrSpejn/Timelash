@@ -21,9 +21,7 @@ export default function progressReducer(state = null, action) {
     }
 
     case FETCH_UNFINISHED_PROGRESS: {
-      return {
-        ...action.payload
-      }
+      return action.payload;
     }
     default:
       return state;

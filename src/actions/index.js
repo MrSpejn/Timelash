@@ -24,7 +24,6 @@ export function endProgress() {
 
 export function fetchUnfinishedProgress() {
   const taskInStorage = JSON.parse(localStorage.getItem('currentActivity'));
-  console.log("fetchUnfinishedProgress");
 
   if (taskInStorage) {
     taskInStorage.date = moment(taskInStorage.date);
