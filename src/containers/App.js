@@ -21,7 +21,7 @@ class App extends Component {
   }
   componentDidMount() {
     console.debug('APP: Did mount', this.props);
-    //this.props.fetchHistory();
+    this.props.fetchHistory();
   }
 
   componentWillReceiveProps(props) {
