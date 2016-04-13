@@ -2,13 +2,10 @@ import React, {Component} from 'react';
 
 export default class ProgressControls extends Component{
 
-  renderButtons() {
-    if (!this.props.hasProgressEnded) {
-      return;
-    }
-  }
-
   render() {
+    if (this.props.hasProgressEnded) {
+      return <div></div>;
+    }
     return (
       <div className='current-activity__controls'>
         <button onClick={() => this.pause()}>P</button>
