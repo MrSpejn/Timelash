@@ -1,4 +1,4 @@
-import React, {Component}        from 'react';
+import React                     from 'react';
 import leftPad                   from '../left-pad.util';
 
 
@@ -12,7 +12,7 @@ export default (props) => {
     const seconds = leftPad(props.currentValue % 60, 2, '0');
     time = `${minutes}:${seconds}`;
   }
-  
+
   return (
     <div className='current-activity__timer'>
       {time}

@@ -64,13 +64,13 @@ const categories = [
       {
         'id': '_fa9',
         'name': 'Speed Typing',
-        'checkpoint': 900,
+        'checkpoint': 900
       },
       {
         'id': '_fa10',
         'name': 'Reading',
-        'checkpoint': 900,
-      },
+        'checkpoint': 900
+      }
     ]
   },
   {
@@ -80,13 +80,13 @@ const categories = [
       {
         'id': '_fa11',
         'name': 'Patryk',
-        'checkpoint': 900,
+        'checkpoint': 900
       },
       {
         'id': '_fa12',
         'name': 'Angie',
-        'checkpoint': 1800,
-      },
+        'checkpoint': 1800
+      }
     ]
   }
 ];
