@@ -16,14 +16,6 @@ class CurrentActivity extends Component{
   constructor() {
     super();
     this.state = {'time': 0};
-    window.onbeforeunload = () => {
-      const progress = this.props.progress;
-
-      if (progress && progress.name) {
-        progress.time = this.state.time;
-        localStorage.setItem('currentActivity', JSON.stringify(progress));
-      }
-    }
   }
 
   oneSecondPassed() {
@@ -36,6 +28,21 @@ class CurrentActivity extends Component{
 
     if (this.props.progress.time !== this.props.progress.checkpoint) {
       this.timer.start();
+      this.extractDataOnUnload();
+    }
+    else {
+      this.props.addToHistory(this.props.progress);
+    }
+  }
+
+  extractDataOnUnload() {
+    window.onbeforeunload = () => {
+      const progress = this.props.progress;
+
+      if (progress && progress.name && this.state.time !== progress.checkpoint) {
+        progress.time = this.state.time;
+        localStorage.setItem('currentActivity', JSON.stringify(progress));
+      }
     }
   }
 
@@ -43,7 +50,7 @@ class CurrentActivity extends Component{
     if (nextProps.progress !== this.props.progress) {
       this.progressHasChanged();
     }
-    else if (this.state.time === this.props.progress.checkpoint) {
+    else if (nextState.time === this.props.progress.checkpoint) {
       this.progressReachedCheckpoint();
     }
   }
@@ -52,7 +59,7 @@ class CurrentActivity extends Component{
     this.timer.pause();
     this.notify();
     const story = this.props.progress;
-    story.time = this.state.time;
+    story.time = this.state.time + 1;
     this.props.addToHistory(story);
   }
 
@@ -84,14 +91,17 @@ class CurrentActivity extends Component{
                                  maxValue={progress.checkpoint} />
              <ProgressControls timer={this.timer}
                                onStop={() => this.endTaskEarlier()}
-                               status={hasProgressEnded} />
+                               hasProgressEnded={hasProgressEnded} />
         </div>
     );
   }
+
   endTaskEarlier() {
+    window.onbeforeunload = () => {};
+
     const story = this.props.progress;
     story.time = this.state.time;
-    this.props.addToHistory(story);
+    this.props.addToHistory({ ...story});
     this.props.endProgress();
   }
 }
