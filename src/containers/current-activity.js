@@ -17,8 +17,9 @@ class CurrentActivity extends Component{
     super();
     this.state = {'time': 0};
     window.onbeforeunload = () => {
-      if (this.props.progress && this.props.progress.name) {
-        const progress = this.props.progress;
+      const progress = this.props.progress;
+
+      if (progress && progress.name) {
         progress.time = this.state.time;
         localStorage.setItem('currentActivity', JSON.stringify(progress));
       }
@@ -33,17 +34,15 @@ class CurrentActivity extends Component{
     this.timer = new Timer(this.oneSecondPassed.bind(this), 1000);
     this.setState({'time': this.props.progress.time});
 
-    console.log(this.state.time);
-    if (this.state.time !== this.props.progress.checkpoint) {
+    if (this.props.progress.time !== this.props.progress.checkpoint) {
       this.timer.start();
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.progress != this.props.progress) {
+  componentWillUpdate(nextProps, nextState) {
+    if (nextProps.progress !== this.props.progress) {
       this.progressHasChanged();
     }
-
     else if (this.state.time === this.props.progress.checkpoint) {
       this.progressReachedCheckpoint();
     }
