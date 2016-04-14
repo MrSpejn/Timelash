@@ -7,9 +7,9 @@ import {addToHistory}            from '../actions/history';
 
 import Timer                     from '../timer.util';
 
-import ProgressTimeCanvas        from '../components/progress-time-canvas';
-import ProgressTimer             from '../components/progress-timer';
-import ProgressControls          from '../components/progress-controls';
+import ProgressTimeCanvas        from '../components/progress/progress-time-canvas';
+import ProgressTimer             from '../components/progress/progress-timer';
+import ProgressControls          from '../components/progress/progress-controls';
 
 
 class ProgressBox extends Component{

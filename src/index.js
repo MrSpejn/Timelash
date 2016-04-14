@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 
 import reducers from './reducers/root';
-import App from './containers/App';
+import Main from './containers/main';
 
 const createStoreWithMiddlewares = applyMiddleware()(createStore);
 
@@ -14,7 +14,7 @@ const createStoreWithMiddlewares = applyMiddleware()(createStore);
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddlewares(reducers)}>
-    <App />
+    <Main />
   </Provider>,
   document.getElementById('app')
 );
