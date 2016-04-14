@@ -1,13 +1,13 @@
 import React, {Component}        from 'react';
 import moment                    from 'moment';
 
-import leftPad                   from '../left-pad.util';
-import HistoryListFilters        from '../components/history-list-filters';
+import leftPad                   from '../../left-pad.util';
+import HistoryListFilters        from '../../components/history/history-list-filters';
 
 export default class HistoryList extends Component {
   constructor() {
     super();
-    this.state = {'filter':'YESTERDAY'};
+    this.state = {'filter':'TODAY'};
   }
 
   doesPassFilter(story) {

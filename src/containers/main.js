@@ -4,13 +4,13 @@ import { connect }                from 'react-redux';
 import ProgressBox                from '../containers/progress-box';
 import ChooseActivityList         from '../containers/choose-activity-list';
 
-import HistoryList                from '../components/history-list';
+import HistoryList                from '../components/history/history-list';
 
 import {fetchUnfinishedProgress}  from '../actions/progress';
 import {fetchHistory}             from '../actions/history';
 
 
-class App extends Component {
+class Main extends Component {
   componentWillMount() {
     if (Notification.permission !== 'granted') {
       Notification.requestPermission();
@@ -22,13 +22,13 @@ class App extends Component {
   }
 
   render() {
-    let currentActivity;
+    let progressBox;
 
     if (this.props.progress) {
-      currentActivity = <ProgressBox />;
+      progressBox = <ProgressBox />;
     }
     else {
-      currentActivity = <h3 className="choose-activity">Choose activity</h3>;
+      progressBox = <h3 className="choose-activity">Choose activity</h3>;
     }
 
     return  (
@@ -38,7 +38,7 @@ class App extends Component {
           <HistoryList history={this.props.history}/>
         </div>
         <div className="current-activity-wrapper">
-          {currentActivity}
+          {progressBox}
         </div>
       </div>
     );
@@ -57,4 +57,4 @@ function mapStateToProps(state) {
 
 
 
-export default connect(mapStateToProps, {fetchHistory, fetchUnfinishedProgress})(App);
+export default connect(mapStateToProps, {fetchHistory, fetchUnfinishedProgress})(Main);
