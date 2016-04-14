@@ -4,7 +4,7 @@ import { connect }                from 'react-redux';
 import CurrentActivity            from '../containers/current-activity';
 import ChooseActivityList         from '../containers/choose-activity-list';
 
-import DoneActivitiesList         from '../components/done-activities-list';
+import HistoryList                from '../components/history-list';
 
 import {fetchUnfinishedProgress}  from '../actions/index';
 import {fetchHistory}             from '../actions/history';
@@ -35,7 +35,7 @@ class App extends Component {
       <div className='app'>
         <ChooseActivityList />
         <div className="done-activties-wrapper">
-          <DoneActivitiesList activities={this.props.history}/>
+          <HistoryList history={this.props.history}/>
         </div>
         <div className="current-activity-wrapper">
           {currentActivity}
