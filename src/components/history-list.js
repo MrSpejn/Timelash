@@ -1,16 +1,38 @@
 import React, {Component}        from 'react';
-import leftPad                   from '../left-pad.util';
+import moment                    from 'moment';
 
+import leftPad                   from '../left-pad.util';
 import HistoryListFilters        from '../components/history-list-filters';
 
 export default class HistoryList extends Component {
   constructor() {
     super();
-    this.state = {'filter':'LASTHOUR'};
+    this.state = {'filter':'YESTERDAY'};
   }
 
-  doesPassFilter() {
-    return true;
+  doesPassFilter(story) {
+    switch (this.state.filter) {
+      case 'LASTHOUR':
+        if (story.date > moment().subtract(1, 'hour')) {
+          return true;
+        }
+        return false;
+      case 'TODAY':
+        if (story.date > moment().hours(0).minutes(0).seconds(0)) {
+          return true;
+        }
+        return false;
+      case 'YESTERDAY':
+          const today = moment().hours(0).minutes(0).seconds(0);
+          const yesterday = today.clone().subtract(1, 'day');
+
+          if (story.date > yesterday && story.date < today) {
+            return true;
+          }
+          return false;
+      default:
+        return true;
+    }
   }
 
   renderHistoryItems() {
