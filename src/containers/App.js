@@ -1,12 +1,12 @@
 import React, { Component}        from 'react';
 import { connect }                from 'react-redux';
 
-import CurrentActivity            from '../containers/current-activity';
+import ProgressBox                from '../containers/progress-box';
 import ChooseActivityList         from '../containers/choose-activity-list';
 
 import HistoryList                from '../components/history-list';
 
-import {fetchUnfinishedProgress}  from '../actions/index';
+import {fetchUnfinishedProgress}  from '../actions/progress';
 import {fetchHistory}             from '../actions/history';
 
 
@@ -25,7 +25,7 @@ class App extends Component {
     let currentActivity;
 
     if (this.props.progress) {
-      currentActivity = <CurrentActivity />;
+      currentActivity = <ProgressBox />;
     }
     else {
       currentActivity = <h3 className="choose-activity">Choose activity</h3>;

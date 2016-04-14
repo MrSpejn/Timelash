@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {setShadow, strokeCircle} from '../canvas.util';
 
-export default class CurrentActivity extends Component {
+export default class ProgressTimeCanvas extends Component {
   componentDidMount() {
     const ctx = this._canvas.getContext('2d');
     ctx.setShadow = setShadow;
@@ -16,14 +16,14 @@ export default class CurrentActivity extends Component {
 
   render() {
     return (
-        <canvas className='current-activity__canvas'
+        <canvas className='progress-box__canvas'
                 width='400'
                 height='400'
                 ref={(el) => this._canvas = el} >
         </canvas>
     );
   }
-  
+
   paintRing(degrees) {
     const ringWidth = 30;
     const canvasWidth = 400;

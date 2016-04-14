@@ -14,7 +14,7 @@ export default (props) => {
   }
 
   return (
-    <div className='current-activity__timer'>
+    <div className='progress-box__timer'>
       {time}
     </div>
   );

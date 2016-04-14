@@ -3,7 +3,7 @@ import {connect}                 from 'react-redux';
 import {bindActionCreators}      from 'redux';
 
 import categories                from '../categories';
-import {startProgress}           from '../actions/index';
+import {startProgress}           from '../actions/progress';
 
 class ChooseActivityList extends Component {
   startProgressIfPossible(progress) {

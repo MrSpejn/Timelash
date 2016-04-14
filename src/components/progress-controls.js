@@ -7,7 +7,7 @@ export default class ProgressControls extends Component{
       return <div></div>;
     }
     return (
-      <div className='current-activity__controls'>
+      <div className='progress-box__controls'>
         <button onClick={() => this.pause()}>P</button>
         <button onClick={() => this.stop()}>S</button>
       </div>

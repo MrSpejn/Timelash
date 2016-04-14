@@ -2,17 +2,17 @@ import React, {Component}        from 'react';
 import {connect}                 from 'react-redux';
 import {bindActionCreators}      from 'redux';
 
-import {endProgress}             from '../actions/index';
+import {endProgress}             from '../actions/progress';
 import {addToHistory}            from '../actions/history';
 
 import Timer                     from '../timer.util';
 
-import CanvasTimeProgress        from '../components/canvas-time-progress';
+import ProgressTimeCanvas        from '../components/progress-time-canvas';
 import ProgressTimer             from '../components/progress-timer';
 import ProgressControls          from '../components/progress-controls';
 
 
-class CurrentActivity extends Component{
+class ProgressBox extends Component{
   constructor() {
     super();
     this.state = {'time': 0};
@@ -41,7 +41,7 @@ class CurrentActivity extends Component{
 
       if (progress && progress.name && this.state.time !== progress.checkpoint) {
         progress.time = this.state.time;
-        localStorage.setItem('currentActivity', JSON.stringify(progress));
+        localStorage.setItem('progress', JSON.stringify(progress));
       }
     }
   }
@@ -81,13 +81,13 @@ class CurrentActivity extends Component{
     const hasProgressEnded = this.state.time === progress.checkpoint;
 
     return (
-         <div className='current-activity'>
-             <div className='current-activity__activity-name'>
+         <div className='progress-box'>
+             <div className='progress-box__activity-name'>
                {progress.name}
              </div>
              <ProgressTimer currentValue={this.state.time}
                             maxValue={progress.checkpoint} />
-             <CanvasTimeProgress currentValue={this.state.time}
+             <ProgressTimeCanvas currentValue={this.state.time}
                                  maxValue={progress.checkpoint} />
              <ProgressControls timer={this.timer}
                                onStop={() => this.endTaskEarlier()}
@@ -120,4 +120,4 @@ function mapDispatchToProps(dispatch) {
 
       //
 
-export default connect(mapStateToProps, mapDispatchToProps)(CurrentActivity);
+export default connect(mapStateToProps, mapDispatchToProps)(ProgressBox);

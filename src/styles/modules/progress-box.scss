@@ -1,6 +1,6 @@
 @import '../variables.scss';
 
-.current-activity {
+.progress-box {
   width: 400px;
   height: 400px;
   color: $light-blue-color;
@@ -12,7 +12,7 @@
 
 }
 
-.current-activity__timer{
+.progress-box__timer{
   position: absolute;
   z-index: 11;
   top: 50%;
@@ -23,7 +23,7 @@
   width: 100%;
 }
 
-.current-activity__activity-name{
+.progress-box__activity-name{
   position: absolute;
   z-index: 11;
   top: 100px;
@@ -34,7 +34,7 @@
   font-size: 32px;
 }
 
-.current-activity__controls{
+.progress-box__controls{
   width: 100%;
   position: absolute;
   z-index: 11;
@@ -43,7 +43,7 @@
   left: 0;
 
 }
-.current-activity__controls button{
+.progress-box__controls button{
   background-color: $light-blue-shadow-color;
   color: #fff;
   border: none;
@@ -51,14 +51,14 @@
   margin: 0 6px;
   cursor: pointer;
 }
-.current-activity__controls button:focus{
+.progress-box__controls button:focus{
   outline: none;
 }
-.current-activity__controls button:hover{
+.progress-box__controls button:hover{
   background-color: #08a7de;
 }
 
-.current-activity__canvas {
+.progress-box__canvas {
   position: absolute;
   z-index: 2;
   top: 0;
@@ -68,7 +68,7 @@
 
   border-radius: 50%;
 }
-.current-activity::before, .current-activity::after{
+.progress-box::before, .progress-box::after{
 
   background-color: #fff;
   border-radius: 50%;
@@ -81,11 +81,11 @@
 
 }
 
-.current-activity::before{
+.progress-box::before{
   z-index: 10;
 }
 
-.current-activity::after{
+.progress-box::after{
   z-index: 1;
   box-shadow: 5px 5px 2px $light-blue-shadow-color;
 }
