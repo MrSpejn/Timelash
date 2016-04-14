@@ -1,12 +1,14 @@
+@import '../variables.scss';
+
 .current-activity {
   width: 400px;
   height: 400px;
-  color: #6CD5FA;
-  background-color: #6CD5FA;
+  color: $light-blue-color;
+  background-color: $light-blue-color;
   border-radius: 100%;
   margin: 0 auto;
   position: relative;
-  box-shadow: inset 5px 5px 2px #3daed3;
+  box-shadow: inset 5px 5px 2px $light-blue-shadow-color;
 
 }
 
@@ -28,7 +30,7 @@
   width: 100%;
   text-align: center;
   left: 0;
-  color: #08a7de;
+  color: $medium-blue-shadow-color;
   font-size: 32px;
 }
 
@@ -42,7 +44,7 @@
 
 }
 .current-activity__controls button{
-  background-color: #3CC4F2;
+  background-color: $light-blue-shadow-color;
   color: #fff;
   border: none;
   font-size: 28px;
@@ -85,5 +87,5 @@
 
 .current-activity::after{
   z-index: 1;
-  box-shadow: 5px 5px 2px #3daed3;
+  box-shadow: 5px 5px 2px $light-blue-shadow-color;
 }

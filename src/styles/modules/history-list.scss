@@ -1,14 +1,17 @@
+@import '../variables.scss';
+
 .done-activities-list{
-    color: #08a7de;
+    color: $bluish-gray-color;
     font-size: 16px;
     list-style: none;
 
-    .hours{
+    .spent-time{
         float: right;
     }
     .date{
         display: inline-block;
         margin-right: 15px;
         font-weight: 600;
+        color: $medium-blue-shadow-color;
     }
 }

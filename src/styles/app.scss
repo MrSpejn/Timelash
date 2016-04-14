@@ -1,7 +1,8 @@
+@import "./variables.scss";
 @import "./modules/logo.scss";
 @import "./modules/choose-activity-list.scss";
 @import "./modules/current-activity.scss";
-@import "./modules/done-activities.scss";
+@import "./modules/history-list.scss";
 
 body, html{
   width: 100%;
@@ -13,9 +14,9 @@ body, html{
 
 body {
   font-family: 'Open Sans', sans-serif;
-  border-top: 36px solid #1C232C;
+  border-top: 36px solid $bluish-gray-color;
   color: #fff;
-  background: #E9E9E9;
+  background: $light-gray-color;
   position: relative;
 }
 
