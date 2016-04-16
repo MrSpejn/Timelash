@@ -7,7 +7,9 @@ export default class ProgressTimeCanvas extends Component {
     ctx.setShadow = setShadow;
     ctx.strokeCircle = strokeCircle;
     this.context = ctx;
-    this.paintRing(this.props.currentValue / this.props.maxValue * 360);
+    if (typeof this.props.currentValue !== 'undefined' && this.props.maxValue ) {
+      this.paintRing(this.props.currentValue / this.props.maxValue * 360);
+    }
   }
 
   componentDidUpdate() {
@@ -31,9 +33,19 @@ export default class ProgressTimeCanvas extends Component {
     const ctx = this.context;
 
     ctx.save();
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    ctx.lineWidth = ringWidth;
 
+    /* Create full circle with shadow*/
+    ctx.fillStyle = '#6CD5FA';
+    ctx.fillRect(0, 0, 400, 400);
+    ctx.lineWidth = ringWidth;
+    ctx.strokeStyle = '#6CD5FA';
+    ctx.setShadow(5, 5, 2, '#3daed3');
+
+    ctx.strokeCircle(canvasHeight/2, canvasWidth/2, (canvasWidth+ringWidth) / 2);
+    ctx.strokeCircle(canvasHeight/2, canvasWidth/2, (canvasWidth - 3*ringWidth) / 2);
+
+
+    /* Set clip path to trim progress circle and shadows */
     ctx.beginPath();
     ctx.arc(canvasHeight/2, canvasWidth/2, canvasWidth/2, radians(-90), radians(degrees-90));
     ctx.lineTo(200, 200);
