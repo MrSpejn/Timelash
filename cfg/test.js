@@ -9,6 +9,7 @@ let baseConfig = require('./base');
 let BowerWebpackPlugin = require('bower-webpack-plugin');
 
 module.exports = {
+  target: 'node',
   devtool: 'eval',
   module: {
     preLoaders: [
@@ -21,6 +22,10 @@ module.exports = {
       }
     ],
     loaders: [
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
+      },
       {
         test: /\.(png|jpg|gif|woff|woff2|css|sass|scss|less|styl)$/,
         loader: 'null-loader'
