@@ -17,5 +17,5 @@ ReactDOM.render(
   <Provider store={createStoreWithMiddlewares(reducers)}>
     <Router history={browserHistory} routes={routes}/>
   </Provider>,
-  document.getElementById('app')
+  document.getElementById('bootstrap')
 );
