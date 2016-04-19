@@ -1,10 +1,10 @@
-import React                  from 'react';
-import {Route, IndexRoute}    from 'react-router';
+import React                    from 'react';
+import {Route, IndexRoute}      from 'react-router';
 
-import MainComponent          from './containers/main';
-import DashboardComponent     from './containers/dashboard';
-import HeaderComponent        from './components/header';
-
+import MainComponent            from './containers/main';
+import DashboardComponent       from './containers/dashboard';
+import HeaderComponent          from './components/header';
+import CalendarWeeklyComponent  from './components/dashboard/calendar-weekly';
 
 
 export default (
@@ -19,6 +19,8 @@ export default (
       );
     }}>
     <IndexRoute component={MainComponent} />
-    <Route path='/dashboard' component={DashboardComponent} />
+    <Route path='/dashboard' component={DashboardComponent}>
+      <Route path='/dashboard/weekly' component={CalendarWeeklyComponent} />
+    </Route>
   </Route>
 );

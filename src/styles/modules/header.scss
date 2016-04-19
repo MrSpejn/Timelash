@@ -8,6 +8,10 @@
     margin-left: calc(50% + 100px);
     line-height: 36px;
     list-style: none;
+    li {
+      margin-right: 20px;
+      display: inline-block;
+    }
   }
 
   &__link {

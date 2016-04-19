@@ -7,6 +7,7 @@ export default () => {
       <Link to={'/'} className='header__logo'>Timelash</Link>
       <ul className='header__link-list'>
         <li><Link className='header__link' to={'/dashboard'} >Dashboard</Link></li>
+        <li><Link className='header__link' to={'/dashboard/weekly'} >My Week</Link></li>
       </ul>
     </div>
 );

@@ -44,3 +44,12 @@ body {
   top: 150px;
   left: 20px;
 }
+
+table {
+  color: $bluish-gray-color;
+}
+
+td, th{
+  width: 150px;
+  text-align: center;
+}
