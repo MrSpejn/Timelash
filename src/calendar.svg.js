@@ -36,6 +36,11 @@ const fakeData = [
     name: 'Project ICT'
   },
   {
+    date: moment(new Date('Wed Apr 17 2016 12:00:00 GMT+0200')),
+    time: 15400,
+    name: 'Project ICT'
+  },
+  {
     date: moment(new Date('Wed Apr 22 2016 18:00:00 GMT+0200')),
     time: 7200,
     name: 'Angie'
@@ -71,11 +76,11 @@ export default class CalendarSvg{
 
   createGrid() {
     const cellHeight = this.cellHeight;
-    this.plain.line(50, 0, this.width, 0);
+    this.plain.line(70, 0, this.width, 0);
     for (let i = 1; i <= 18; i++) {
 
-      this.plain.line(50, i * cellHeight, this.width, i * cellHeight);
-      this.plain.text(60, i * cellHeight - (this.cellHeight + 10) / 2, `${i + 5}:00`).attr({'font-size': '10px'});
+      this.plain.line(70, i * cellHeight, this.width, i * cellHeight);
+      this.plain.text(80, i * cellHeight - (this.cellHeight + 10) / 2, `${i + 5}:00`).attr({'font-size': '12px'});
     }
 
   }
@@ -105,7 +110,10 @@ export default class CalendarSvg{
       const height    = this.calculateHeight(block);
       const color     = getColor(block.name);
 
-      return this.plain.rect(x, y, width, height).attr({'fill': color});
+      const rect = this.plain.rect(x, y, width, height).attr({'fill': color});
+      rect._story = block;
+      return rect;
+
     });
 
 
@@ -125,6 +133,18 @@ export default class CalendarSvg{
 
   calculateHeight(block) {
     return Math.ceil(block.time / 3600 / 18 * this.height);
+  }
+
+  onElementMouseOver(executable) {
+    this.cells.map((cell) => {
+      cell.mouseover(executable.bind(null, cell, cell._story));
+    });
+  }
+
+  onElementMouseOut(executable) {
+    this.cells.map((cell) => {
+      cell.mouseout(executable.bind(null, cell, cell._story));
+    });
   }
 }
 
@@ -147,6 +167,16 @@ function getColor(color) {
       return '#666';
   }
 }
+function darkenColorPercent(color, amount) {
+  amount = (100 + amount) / 100;
+  const number = parseInt(color.slice(1), 16);
+  const red    = Math.floor((number >> 16) * amount);
+  const green  = Math.floor((number >> 8 & 0x00FF) * amount);
+  const blue   = Math.floor((number & 0x0000FF) * amount);
+  console.log(red, green, blue);
+  return `#${red > 255 ? 255 : red.toString(16)}${green > 255 ? 255 : green.toString(16)}${blue > 255 ? 255 : blue.toString(16)}`;
+}
+
 
 function darkenColor(color, amount) {
   const number = parseInt(color.slice(1), 16);
