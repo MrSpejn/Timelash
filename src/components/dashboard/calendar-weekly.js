@@ -2,10 +2,12 @@ import React, {Component}     from 'react';
 import moment                 from 'moment';
 
 import CalendarSvg            from '../../calendar.svg';
+import CalendarHint           from './calendar-hint';
 
 export default class CalendarWeeklyComponent extends Component{
   constructor() {
     super();
+    this.state = {shouldDisplayHint: false, hintOptions: null};
     this.days = [];
     const startingDate = moment().startOf('week');
     let date = startingDate;
@@ -15,18 +17,28 @@ export default class CalendarWeeklyComponent extends Component{
       date = date.clone().add(1, 'day');
     }
   }
-  componentDidMount() {
-    const currentHistory = JSON.parse(localStorage.getItem('History')) || [];
-    const start = moment().startOf('week');
-    const end   = start.clone().add(7, 'days');
 
-    currentHistory.filter((story) => {
-      if (moment(story.date) > start && moment(story.date) < end) {
-        return true;
-      }
+  componentDidMount() {
+    const calendar = new CalendarSvg('#calendar');
+
+    calendar.onElementMouseOver((element, story, event) => {
+      const hintOptions = {
+        x: parseInt(element.node.attributes.x.value),
+        y: parseInt(element.node.attributes.y.value) + 36,
+        targetWidth: parseInt(element.node.attributes.width.value),
+        item: story
+      };
+      this.setState({
+        hintOptions,
+        shouldDisplayHint: true
+      });
     });
 
-    const calendar = new CalendarSvg('#calendar', currentHistory);
+    calendar.onElementMouseOut((element, story, event) => {
+      this.setState({
+        shouldDisplayHint: false
+      });
+    });
   }
 
   renderHeaders() {
@@ -38,13 +50,12 @@ export default class CalendarWeeklyComponent extends Component{
       );
     });
   }
-  paint() {
 
-  }
   render() {
     return (
       <div className="weekly-calendar">
         <ul className="weekly-calendar__header">{this.renderHeaders()}</ul>
+        {this.state.shouldDisplayHint ? <CalendarHint options={this.state.hintOptions}/> : <div></div>}
         <svg id="calendar" width="1036" height="600"></svg>
       </div>
     )
