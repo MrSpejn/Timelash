@@ -13,15 +13,12 @@
   }
 
   #calendar {
-    rect {
-      fill: #2FC4F7;
-    }
+
     rect:hover{
-      fill: #0794c5;
-      stroke: #3daed3;
-      stroke-width: 2;
+      cursor: pointer;
     }
     line{
+      shape-rendering: crispEdges;
       stroke-width: 1;
       stroke: #ddd;
     }
