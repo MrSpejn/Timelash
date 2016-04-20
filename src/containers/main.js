@@ -32,7 +32,7 @@ class Main extends Component {
     }
 
     return  (
-      <div className='app'>
+      <div>
         <ChooseActivityList />
         <div className="done-activties-wrapper">
           <HistoryList history={this.props.history}/>

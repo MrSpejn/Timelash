@@ -1,0 +1,30 @@
+.weekly-calendar{
+
+  &__header{
+    color: #172A37;
+    padding-left: calc(100% / 8);
+    box-sizing: border-box;
+
+    li {
+      text-align: center;
+      display: inline-block;
+      width: calc(100% / 7);
+    }
+  }
+
+  #calendar {
+
+    rect:hover{
+      cursor: pointer;
+    }
+    line{
+      shape-rendering: crispEdges;
+      stroke-width: 1;
+      stroke: #ddd;
+    }
+    text {
+      fill: #444;
+    }
+  }
+
+}
