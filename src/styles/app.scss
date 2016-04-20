@@ -3,6 +3,8 @@
 @import "./modules/choose-activity-list.scss";
 @import "./modules/progress-box.scss";
 @import "./modules/history-list.scss";
+@import "./modules/weekly-calendar.scss";
+
 
 body, html{
   width: 100%;
@@ -18,8 +20,6 @@ body {
   background: $light-gray-color;
   position: relative;
 }
-
-
 
 .app{
   position: relative;
@@ -43,13 +43,4 @@ body {
   position: absolute;
   top: 150px;
   left: 20px;
-}
-
-table {
-  color: $bluish-gray-color;
-}
-
-td, th{
-  width: 150px;
-  text-align: center;
 }

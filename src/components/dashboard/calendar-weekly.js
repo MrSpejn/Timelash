@@ -1,5 +1,7 @@
-import React, {Component} from 'react';
-import moment from 'moment';
+import React, {Component}     from 'react';
+import moment                 from 'moment';
+
+import CalendarSvg            from '../../calendar.svg';
 
 export default class CalendarWeeklyComponent extends Component{
   constructor() {
@@ -13,23 +15,37 @@ export default class CalendarWeeklyComponent extends Component{
       date = date.clone().add(1, 'day');
     }
   }
+  componentDidMount() {
+    const currentHistory = JSON.parse(localStorage.getItem('History')) || [];
+    const start = moment().startOf('week');
+    const end   = start.clone().add(7, 'days');
+
+    currentHistory.filter((story) => {
+      if (moment(story.date) > start && moment(story.date) < end) {
+        return true;
+      }
+    });
+
+    const calendar = new CalendarSvg('#calendar', currentHistory);
+  }
 
   renderHeaders() {
     return this.days.map((date) => {
       return (
-        <li style={{'display': 'inline-block', width: '100px'}}>
+        <li>
           {date.format('Do MMM')}
         </li>
       );
     });
   }
-  renderDays() {
+  paint() {
 
   }
   render() {
     return (
-      <div>
-        <ul>{this.renderHeaders()}</ul>
+      <div className="weekly-calendar">
+        <ul className="weekly-calendar__header">{this.renderHeaders()}</ul>
+        <svg id="calendar" width="1036" height="600"></svg>
       </div>
     )
   }
