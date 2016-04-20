@@ -30,9 +30,9 @@ export default class CalendarWeeklyComponent extends Component{
   }
 
   renderHeaders() {
-    return this.days.map((date) => {
+    return this.days.map((date, i) => {
       return (
-        <li>
+        <li key={i}>
           {date.format('Do MMM')}
         </li>
       );
