@@ -11,6 +11,36 @@ const fakeData = [
     name: 'Training'
   },
   {
+    date: moment(new Date('Wed Apr 17 2016 9:30:00 GMT+0200')),
+    time: 3600,
+    name: 'Training'
+  },
+  {
+    date: moment(new Date('Wed Apr 19 2016 14:00:00 GMT+0200')),
+    time: 7200,
+    name: 'Training'
+  },
+  {
+    date: moment(new Date('Wed Apr 19 2016 9:00:00 GMT+0200')),
+    time: 18000,
+    name: 'Angie'
+  },
+  {
+    date: moment(new Date('Wed Apr 17 2016 16:47:00 GMT+0200')),
+    time: 4500,
+    name: 'Swimming'
+  },
+  {
+    date: moment(new Date('Wed Apr 17 2016 10:30:00 GMT+0200')),
+    time: 5400,
+    name: 'Angie'
+  },
+  {
+    date: moment(new Date('Wed Apr 17 2016 16:17:00 GMT+0200')),
+    time: 1800,
+    name: 'Wash dishes'
+  },
+  {
     date: moment(new Date('Wed Apr 19 2016 8:00:00 GMT+0200')),
     time: 3600,
     name: 'Project ICT'
@@ -23,7 +53,7 @@ const fakeData = [
   {
     date: moment(new Date('Wed Apr 20 2016 12:30:00 GMT+0200')),
     time: 6400,
-    name: 'Angie'
+    name: 'Project ICT'
   },
   {
     date: moment(new Date('Wed Apr 21 2016 13:00:00 GMT+0200')),
@@ -36,22 +66,37 @@ const fakeData = [
     name: 'Project ICT'
   },
   {
+    date: moment(new Date('Wed Apr 22 2016 12:30:00 GMT+0200')),
+    time: 5400,
+    name: 'Training'
+  },
+  {
     date: moment(new Date('Wed Apr 17 2016 12:00:00 GMT+0200')),
     time: 15400,
     name: 'Project ICT'
   },
   {
-    date: moment(new Date('Wed Apr 22 2016 18:00:00 GMT+0200')),
+    date: moment(new Date('Wed Apr 21 2016 10:00:00 GMT+0200')),
+    time: 8800,
+    name: 'Project ICT'
+  },
+  {
+    date: moment(new Date('Wed Apr 22 2016 10:00:00 GMT+0200')),
     time: 7200,
     name: 'Angie'
   },
   {
-    date: moment(new Date('Wed Apr 20 2016 20:00:00 GMT+0200')),
+    date: moment(new Date('Wed Apr 18 2016 13:00:00 GMT+0200')),
+    time: 4500,
+    name: 'Wash dishes'
+  },
+  {
+    date: moment(new Date('Wed Apr 20 2016 11:30:00 GMT+0200')),
     time: 3600,
     name: 'Wash dishes'
   },
   {
-    date: moment(new Date('Wed Apr 21 2016 15:30:00 GMT+0200')),
+    date: moment(new Date('Wed Apr 21 2016 15:00:00 GMT+0200')),
     time: 3600,
     name: 'Angie'
   }

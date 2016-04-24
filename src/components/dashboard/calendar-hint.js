@@ -4,6 +4,10 @@ export default (props) => {
   const item = props.options.item;
   const position = {top: props.options.y};
   let direction;
+
+  if (item.time < 3600) {
+    position.top -= 10;
+  }
   if (props.options.x > 230) {
     position.left = props.options.x - 215;
     direction = 'left';
