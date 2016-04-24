@@ -5,3 +5,6 @@ export const FETCH_UNFINISHED_PROGRESS = 'fetch_unfinished_progress';
 
 export const FETCH_HISTORY = 'fetch_history';
 export const ADD_TO_HISTORY = 'add_to_history';
+
+export const SIGN_IN = 'SIGN_IN';
+export const SIGN_OUT = 'SIGN_OUT';

@@ -6,6 +6,7 @@ import {reducer as formReducer}   from 'redux-form';
 const rootReducer = combineReducers({
   history: historyReducer,
   progress: progressReducer,
+  auth: authReducer,
   form: formReducer
 });
 
