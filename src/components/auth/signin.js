@@ -4,7 +4,7 @@ import {userSignin}         from 'actions/auth';
 
 class Signin extends Component {
   handleFormSubmit(formProps) {
-    console.log(formProps);
+    this.props.userSignin(formProps);
   }
   render() {
     const {handleSubmit, fields: {password, login}} = this.props;

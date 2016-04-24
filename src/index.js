@@ -8,8 +8,9 @@ import {Router, browserHistory}           from 'react-router';
 
 import reducers                           from './reducers/root';
 import routes                             from './routes';
+import thunk                              from 'redux-thunk';
 
-const createStoreWithMiddlewares = applyMiddleware()(createStore);
+const createStoreWithMiddlewares = applyMiddleware(thunk)(createStore);
 
 
 
