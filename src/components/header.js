@@ -1,10 +1,16 @@
 import React, {Component}    from 'react';
 import {Link}                from 'react-router';
+import {connect}             from 'react-redux';
 
 class Header extends Component{
   renderHeaderLinks() {
     if (this.props.authorized) {
-      return [];
+      return [
+        <li key='dashboard'><Link className='header__link' to='/dashboard'>Dashboard</Link></li>,
+        <li key='weekly'><Link className='header__link' to='/dashboard/weekly'>My Week</Link></li>,
+        <li key='signout'><Link className='header__link' to='/signout'>Sign Out</Link></li>
+
+      ];
     } else {
       return [
         <li key='signin'><Link className='header__link' to='/signin'>Sign In</Link></li>
@@ -22,4 +28,7 @@ class Header extends Component{
     );
   }
 }
-export default Header;
+function mapStateToProps(state) {
+  return {authorized: state.auth.authorized}
+}
+export default connect(mapStateToProps)(Header);
