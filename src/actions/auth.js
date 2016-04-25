@@ -11,6 +11,8 @@ export function userSignin({login, password}) {
           type: SIGN_IN,
           payload: null
         });
+        localStorage.setItem('token', res.data.token);
+        browserHistory.push('/current');
       })
       .catch(e => {
         console.log(e);

@@ -9,13 +9,18 @@ import {Router, browserHistory}           from 'react-router';
 import reducers                           from './reducers/root';
 import routes                             from './routes';
 import thunk                              from 'redux-thunk';
+import {SIGN_IN}                          from './actions/types';
 
 const createStoreWithMiddlewares = applyMiddleware(thunk)(createStore);
 
-
+const store = createStoreWithMiddlewares(reducers);
+const token = localStorage.getItem('token');
+if (token) {
+    store.dispatch({type: SIGN_IN});
+}
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddlewares(reducers)}>
+  <Provider store={store}>
     <Router history={browserHistory} routes={routes}/>
   </Provider>,
   document.getElementById('bootstrap')
