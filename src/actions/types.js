@@ -8,3 +8,5 @@ export const ADD_TO_HISTORY = 'add_to_history';
 
 export const SIGN_IN = 'SIGN_IN';
 export const SIGN_OUT = 'SIGN_OUT';
+
+export const RAISE_AUTH_ERROR = 'RAISE_AUTH_ERROR';

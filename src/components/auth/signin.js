@@ -18,12 +18,17 @@ class Signin extends Component {
           <label>Password: </label>
           <input {...password} type='password' />
         </fieldset>
+        <span>{this.props.errorMessage}</span>
         <button type='submit'>Sign in</button>
       </form>
     );
   }
 }
+function mapStateToProps(state) {
+  return {errorMessage: state.errors.auth};
+}
+
 export default reduxForm({
   form: 'signin',
   fields: ['login', 'password']
-}, null, {userSignin})(Signin);
+}, mapStateToProps, {userSignin})(Signin);

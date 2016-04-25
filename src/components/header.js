@@ -20,7 +20,7 @@ class Header extends Component{
   render() {
     return (
       <div className='header'>
-        <Link to={'/'} className='header__logo'>Timelash</Link>
+        <Link to={this.props.authorized ? '/current' : '/'} className='header__logo'>Timelash</Link>
         <ul className='header__link-list'>
           {this.renderHeaderLinks()}
         </ul>
