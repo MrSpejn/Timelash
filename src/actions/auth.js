@@ -1,4 +1,4 @@
-import {SIGN_IN, SIGN_OUT} from './types';
+import {SIGN_IN, SIGN_OUT, RAISE_AUTH_ERROR} from './types';
 import axios               from 'axios';
 import {browserHistory}    from 'react-router';
 
@@ -14,8 +14,11 @@ export function userSignin({login, password}) {
         localStorage.setItem('token', res.data.token);
         browserHistory.push('/current');
       })
-      .catch(e => {
-        console.log(e);
+      .catch(() => {
+        dispatch({
+          type: RAISE_AUTH_ERROR,
+          payload: 'Wrong username or password'
+        });
       });
   }
 }
