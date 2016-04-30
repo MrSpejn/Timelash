@@ -5,10 +5,10 @@ import ReactDOM                           from 'react-dom';
 import { Provider }                       from 'react-redux';
 import { createStore, applyMiddleware }   from 'redux';
 import {Router, browserHistory}           from 'react-router';
+import thunk                              from 'redux-thunk';
 
 import reducers                           from './reducers/root';
 import routes                             from './routes';
-import thunk                              from 'redux-thunk';
 import {SIGN_IN}                          from './actions/types';
 
 const createStoreWithMiddlewares = applyMiddleware(thunk)(createStore);

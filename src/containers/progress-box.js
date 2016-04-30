@@ -5,7 +5,7 @@ import {bindActionCreators}      from 'redux';
 import {endProgress}             from '../actions/progress';
 import {addToHistory}            from '../actions/history';
 
-import Timer                     from '../timer.util';
+import Timer                     from '../utilities/timer';
 
 import ProgressTimeCanvas        from '../components/progress/progress-time-canvas';
 import ProgressTimer             from '../components/progress/progress-timer';

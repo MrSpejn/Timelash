@@ -1,7 +1,7 @@
 import React, {Component}        from 'react';
 import moment                    from 'moment';
 
-import leftPad                   from '../../left-pad.util';
+import leftPad                   from '../../utilities/left-pad';
 import HistoryListFilters        from '../../components/history/history-list-filters';
 
 export default class HistoryList extends Component {

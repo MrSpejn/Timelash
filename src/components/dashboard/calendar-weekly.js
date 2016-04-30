@@ -1,7 +1,7 @@
 import React, {Component}     from 'react';
 import moment                 from 'moment';
 
-import CalendarSvg            from '../../calendar.svg';
+import CalendarSvg            from '../../utilities/svg-calendar';
 import CalendarHint           from './calendar-hint';
 
 export default class CalendarWeeklyComponent extends Component{
@@ -24,7 +24,7 @@ export default class CalendarWeeklyComponent extends Component{
     calendar.onElementMouseOver((element, story, event) => {
       const hintOptions = {
         x: parseInt(element.node.attributes.x.value),
-        y: parseInt(element.node.attributes.y.value) + 36,
+        y: parseInt(element.node.attributes.y.value) + 90,
         targetWidth: parseInt(element.node.attributes.width.value),
         item: story
       };
