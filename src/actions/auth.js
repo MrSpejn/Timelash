@@ -25,7 +25,6 @@ export function userSignin({login, password}) {
 
 export function userSignout() {
   localStorage.removeItem('token');
-  browserHistory.push('/');
   return {
     type: SIGN_OUT
   };
