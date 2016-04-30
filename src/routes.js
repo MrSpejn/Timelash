@@ -1,8 +1,8 @@
 import React                    from 'react';
 import {Route, IndexRoute}      from 'react-router';
 
-import MainComponent            from './containers/main';
-import DashboardComponent       from './containers/dashboard';
+import MainComponent            from './components/main';
+import DashboardComponent       from './components/dashboard/dashboard';
 import HeaderComponent          from './components/header';
 import EmbraceComponent         from './components/embrace';
 import SigninComponent          from './components/auth/signin';

@@ -2,14 +2,14 @@ import React, {Component}        from 'react';
 import {connect}                 from 'react-redux';
 import {bindActionCreators}      from 'redux';
 
-import {endProgress}             from '../actions/progress';
-import {addToHistory}            from '../actions/history';
+import {endProgress}             from 'actions/progress';
+import {addToHistory}            from 'actions/history';
 
-import Timer                     from '../utilities/timer';
+import Timer                     from '../../utilities/timer';
 
-import ProgressTimeCanvas        from '../components/progress/progress-time-canvas';
-import ProgressTimer             from '../components/progress/progress-timer';
-import ProgressControls          from '../components/progress/progress-controls';
+import ProgressTimeCanvas        from './progress-time-canvas';
+import ProgressTimer             from './progress-timer';
+import ProgressControls          from './progress-controls';
 
 
 class ProgressBox extends Component{
