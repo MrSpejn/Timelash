@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {setShadow, strokeCircle} from '../../canvas.util';
+import {setShadow, strokeCircle} from '../../utilities/canvas';
 
 export default class ProgressTimeCanvas extends Component {
   componentDidMount() {

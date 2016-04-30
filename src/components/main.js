@@ -1,10 +1,10 @@
 import React, { Component}        from 'react';
 import { connect }                from 'react-redux';
 
-import ProgressBox                from '../containers/progress-box';
-import ChooseActivityList         from '../containers/choose-activity-list';
+import ProgressBox                from './progress/progress-box';
+import ChooseActivityList         from './choose-activity-list';
 
-import HistoryList                from '../components/history/history-list';
+import HistoryList                from './history/history-list';
 
 import {fetchUnfinishedProgress}  from '../actions/progress';
 import {fetchHistory}             from '../actions/history';
@@ -32,14 +32,16 @@ class Main extends Component {
     }
 
     return  (
-      <div>
+
+      <div className="activity-supervisor">
+        <div className="current-activity-wrapper">
+          {progressBox}
+        </div>
         <ChooseActivityList />
         <div className="done-activties-wrapper">
           <HistoryList history={this.props.history}/>
         </div>
-        <div className="current-activity-wrapper">
-          {progressBox}
-        </div>
+
       </div>
     );
   }

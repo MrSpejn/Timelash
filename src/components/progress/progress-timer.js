@@ -1,5 +1,5 @@
 import React                     from 'react';
-import leftPad                   from '../../left-pad.util';
+import leftPad                   from '../../utilities/left-pad';
 
 
 export default (props) => {
