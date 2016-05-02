@@ -2,22 +2,17 @@ import React, { Component}        from 'react';
 import { connect }                from 'react-redux';
 
 import ProgressBox                from './progress/progress-box';
-import ChooseActivityList         from './choose-activity-list';
-
+import ActivitiesList             from './activities/activities-list';
 import HistoryList                from './history/history-list';
+import {fetchUnfinishedProgress}  from 'actions/progress';
+import {fetchHistory}             from 'actions/history';
+import {fetchProfile}             from 'actions/profile';
 
-import {fetchUnfinishedProgress}  from '../actions/progress';
-import {fetchHistory}             from '../actions/history';
 
-
-class Main extends Component {
+class UserActivity extends Component {
   componentWillMount() {
-    if (Notification.permission !== 'granted') {
-      Notification.requestPermission();
-    }
     this.props.fetchUnfinishedProgress();
-  }
-  componentDidMount() {
+    this.props.fetchProfile();
     this.props.fetchHistory();
   }
 
@@ -37,7 +32,7 @@ class Main extends Component {
         <div className="current-activity-wrapper">
           {progressBox}
         </div>
-        <ChooseActivityList />
+        <ActivitiesList />
         <div className="done-activties-wrapper">
           <HistoryList history={this.props.history}/>
         </div>
@@ -53,10 +48,14 @@ class Main extends Component {
 function mapStateToProps(state) {
   return {
     history: state.history,
-    progress: state.progress
+    progress: state.progress,
   };
 }
 
 
 
-export default connect(mapStateToProps, {fetchHistory, fetchUnfinishedProgress})(Main);
+export default connect(mapStateToProps, {
+  fetchUnfinishedProgress,
+  fetchHistory,
+  fetchProfile
+})(UserActivity);

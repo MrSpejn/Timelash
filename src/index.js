@@ -11,6 +11,7 @@ import reducers                           from './reducers/root';
 import routes                             from './routes';
 import {SIGN_IN}                          from './actions/types';
 
+
 const createStoreWithMiddlewares = applyMiddleware(thunk)(createStore);
 
 const store = createStoreWithMiddlewares(reducers);
@@ -18,6 +19,11 @@ const token = localStorage.getItem('token');
 if (token) {
     store.dispatch({type: SIGN_IN});
 }
+
+if (Notification.permission !== 'granted') {
+  Notification.requestPermission();
+}
+
 
 ReactDOM.render(
   <Provider store={store}>
