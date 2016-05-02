@@ -3,6 +3,7 @@ import axios               from 'axios';
 import {browserHistory}    from 'react-router';
 
 const API_URL = 'http://localhost:3000';
+
 export function userSignin({login, password}) {
   return function(dispatch) {
     axios.post(`${API_URL}/signin`, {email:login, password})
@@ -12,7 +13,7 @@ export function userSignin({login, password}) {
           payload: null
         });
         localStorage.setItem('token', res.data.token);
-        browserHistory.push('/current');
+        browserHistory.push('/activity');
       })
       .catch(() => {
         dispatch({
