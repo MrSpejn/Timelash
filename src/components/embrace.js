@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 class Embrace extends Component {
   render() {
     return (
-      <div className='embrace'></div>
+      <h1 className='embrace'>Welcome in Timelash</h1>
     );
   }
 }
