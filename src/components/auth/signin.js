@@ -9,7 +9,7 @@ class Signin extends Component {
   render() {
     const {handleSubmit, fields: {password, login}} = this.props;
     return (
-      <form name='signin' onSubmit={handleSubmit((d) => this.handleFormSubmit(d))}>
+      <form className="signin" ame='signin' onSubmit={handleSubmit((d) => this.handleFormSubmit(d))}>
         <fieldset>
           <label>Login: </label>
           <input {...login} type='text' />

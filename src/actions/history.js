@@ -25,7 +25,7 @@ export function addToHistory(activity) {
   return function (dispatch) {
     const token = localStorage.getItem('token');
     axios.post (API_URL, activity, {headers: {authorization: token}})
-    .then(res => {
+    .then(() => {
       dispatch({ type: ADD_TO_HISTORY, payload: activity});
     })
     .catch(err => {

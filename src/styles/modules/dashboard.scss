@@ -1,0 +1,67 @@
+.dashboard {
+  padding-top: 60px;
+  overflow: auto;
+  min-height: 100%;
+  background-color: $dark-white-color;
+  color: #888;
+  &__section-title{
+    @extend .app-section-title;
+    font-size: 14px;
+  }
+
+  &__subsection-title{
+    font-size: 16px;
+    color: #888;
+    text-align: center;
+    margin-bottom: 0;
+  }
+  &__section {
+    @extend .app-section;
+  }
+
+  &__statistics-section {
+    h3{
+      text-align: center;
+      font-size: 12px;
+    }
+    div:nth-of-type(3n) p{
+      color: $brand-blue;
+    }
+    div:nth-of-type(3n+1) p{
+      color: $brand-blue-30;
+    }
+    div:nth-of-type(3n+2) p{
+      color: $brand-orange;
+    }
+  }
+  &__statistic {
+    margin-top: 10px;
+    font-size: 24px;
+    text-align: center;
+    font-weight: 800;
+
+  }
+  .categories-pie-charts{
+    .chart{
+      box-sizing: border-box;
+      padding: 0;
+    }
+    .chart svg{
+      width: 100%;
+    }
+      .chart:not(:last-child) {
+        border-right: 1px solid #ddd;
+
+      }
+  }
+
+  #line-chart {
+    width: 100%;
+  }
+
+}
+
+.categories-selection {
+  border-left: 1px solid #ddd;
+  height: 400px;
+}

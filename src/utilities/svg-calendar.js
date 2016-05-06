@@ -1,102 +1,104 @@
 import Snap                   from 'imports-loader?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js';
 import moment                 from 'moment';
 
+import * as colors            from '../colors';
+
 const SECONDS_IN_DAY     = 3600 * 24;
 const MILISECONDS_IN_DAY = 1000 * SECONDS_IN_DAY;
 
 const fakeData = [
   {
-    date: moment(new Date('Wed Apr 27 2016 9:00:00 GMT+0200')),
+    date: moment(new Date('May 4 2016 9:00:00 GMT+0200')),
     time: 7900,
     name: 'Training'
   },
   {
-    date: moment(new Date('Wed Apr 24 2016 9:30:00 GMT+0200')),
+    date: moment(new Date('May 1 2016 9:30:00 GMT+0200')),
     time: 3600,
     name: 'Training'
   },
   {
-    date: moment(new Date('Wed Apr 26 2016 14:00:00 GMT+0200')),
+    date: moment(new Date('May 3 2016 14:00:00 GMT+0200')),
     time: 7200,
     name: 'Training'
   },
   {
-    date: moment(new Date('Wed Apr 26 2016 9:00:00 GMT+0200')),
+    date: moment(new Date('May 3 2016 9:00:00 GMT+0200')),
     time: 18000,
     name: 'Angie'
   },
   {
-    date: moment(new Date('Wed Apr 24 2016 16:47:00 GMT+0200')),
+    date: moment(new Date('May 1 2016 16:47:00 GMT+0200')),
     time: 4500,
     name: 'Swimming'
   },
   {
-    date: moment(new Date('Wed Apr 24 2016 10:30:00 GMT+0200')),
+    date: moment(new Date('May 1 2016 10:30:00 GMT+0200')),
     time: 5400,
     name: 'Angie'
   },
   {
-    date: moment(new Date('Wed Apr 24 2016 16:17:00 GMT+0200')),
+    date: moment(new Date('May 1 2016 16:17:00 GMT+0200')),
     time: 1800,
     name: 'Wash dishes'
   },
   {
-    date: moment(new Date('Wed Apr 26 2016 8:00:00 GMT+0200')),
+    date: moment(new Date('May 3 2016 8:00:00 GMT+0200')),
     time: 3600,
     name: 'Project ICT'
   },
   {
-    date: moment(new Date('Wed Apr 25 2016 10:00:00 GMT+0200')),
+    date: moment(new Date('May 2 2016 10:00:00 GMT+0200')),
     time: 10800,
     name: 'Swimming'
   },
   {
-    date: moment(new Date('Wed Apr 27 2016 12:30:00 GMT+0200')),
+    date: moment(new Date('May 4 2016 12:30:00 GMT+0200')),
     time: 6400,
     name: 'Project ICT'
   },
   {
-    date: moment(new Date('Wed Apr 28 2016 13:00:00 GMT+0200')),
+    date: moment(new Date('May 5 2016 13:00:00 GMT+0200')),
     time: 7200,
     name: 'Swimming'
   },
   {
-    date: moment(new Date('Wed Apr 26 2016 16:00:00 GMT+0200')),
+    date: moment(new Date('May 3 2016 16:00:00 GMT+0200')),
     time: 5400,
     name: 'Project ICT'
   },
   {
-    date: moment(new Date('Wed Apr 29 2016 12:30:00 GMT+0200')),
+    date: moment(new Date('May 6 2016 12:30:00 GMT+0200')),
     time: 5400,
     name: 'Training'
   },
   {
-    date: moment(new Date('Wed Apr 24 2016 12:00:00 GMT+0200')),
+    date: moment(new Date('May 1 2016 12:00:00 GMT+0200')),
     time: 15400,
     name: 'Project ICT'
   },
   {
-    date: moment(new Date('Wed Apr 28 2016 10:00:00 GMT+0200')),
+    date: moment(new Date('May 5 2016 10:00:00 GMT+0200')),
     time: 8800,
     name: 'Project ICT'
   },
   {
-    date: moment(new Date('Wed Apr 30 2016 10:00:00 GMT+0200')),
+    date: moment(new Date('May 7 2016 10:00:00 GMT+0200')),
     time: 7200,
     name: 'Angie'
   },
   {
-    date: moment(new Date('Wed Apr 25 2016 13:00:00 GMT+0200')),
+    date: moment(new Date('May 2 2016 13:00:00 GMT+0200')),
     time: 4500,
     name: 'Wash dishes'
   },
   {
-    date: moment(new Date('Wed Apr 27 2016 11:30:00 GMT+0200')),
+    date: moment(new Date('May 4 2016 11:30:00 GMT+0200')),
     time: 3600,
     name: 'Wash dishes'
   },
   {
-    date: moment(new Date('Wed Apr 28 2016 15:00:00 GMT+0200')),
+    date: moment(new Date('May 5 2016 15:00:00 GMT+0200')),
     time: 3600,
     name: 'Angie'
   }
@@ -110,22 +112,41 @@ export default class CalendarSvg{
 
     this.width          = element.clientWidth;
     this.height         = element.clientHeight;
-    this.cellWidth      = Math.round(this.width / 8);
+    this.margin         = 60;
+    this.yAxis          = 60;
+    this.xAxis          = 20;
+    this.cellWidth      = Math.round((this.width - this.yAxis - 2 * this.margin)/ 7);
     this.cellHeight     = this.height / 18;
 
     this.createGrid();
+    this.createXAxis();
     this.cells = this.createDataCells(fakeData);
     this.mapHandlersToCells();
 
   }
 
+  createXAxis() {
+    let day = moment().startOf('week');
+    for (let i = 0; i < 7; i++) {
+      const x = this.margin + this.yAxis + (i + 0.5) * this.cellWidth;
+      this.plain.text(x, this.margin, day.format('DD MMM'))
+        .attr({'font-size': '16px', 'text-anchor': 'middle'});
+      day = day.add(1, 'day');
+    }
+  }
+
   createGrid() {
     const cellHeight = this.cellHeight;
-    this.plain.line(70, 0, this.width, 0);
-    for (let i = 1; i <= 18; i++) {
+    const margin = this.margin;
+    const xAxis = this.xAxis;
 
-      this.plain.line(70, i * cellHeight, this.width, i * cellHeight);
-      this.plain.text(80, i * cellHeight - (this.cellHeight + 10) / 2, `${i + 5}:00`).attr({'font-size': '12px'});
+    this.plain.line(margin + this.yAxis - 15, margin + xAxis, this.width - margin, margin + xAxis);
+    for (let i = 1; i <= 18; i++) {
+      const height = i * cellHeight + margin + xAxis;
+
+      this.plain.line(margin + this.yAxis - 15, height, this.width - margin, height);
+      this.plain.text(margin + this.yAxis - 20, height - cellHeight + 5, `${i + 5}:00`)
+        .attr({'font-size': '14px', 'text-anchor': 'end'});
     }
 
   }
@@ -134,7 +155,7 @@ export default class CalendarSvg{
     this.cells.map((cell) => {
       cell.mouseover(() => {
           const baseFill = cell.node.attributes.fill.value
-          cell.attr({'fill': darkenColor(baseFill, -40)});
+          cell.attr({'fill': colors.darken(baseFill, -40)});
           cell.baseFill = baseFill;
       });
 
@@ -166,14 +187,14 @@ export default class CalendarSvg{
   calculateX(date) {
     const timestamp = date - moment().startOf('week');
 
-    return Math.floor(timestamp / MILISECONDS_IN_DAY + 1) * this.cellWidth;
+    return Math.floor(timestamp / MILISECONDS_IN_DAY) * this.cellWidth + this.yAxis + this.margin;
   }
 
   calculateY(date) {
     const maxTime = 18 * 60;
     const time = (date.hours() - 6) * 60 + date.minutes();
 
-    return Math.floor(time/maxTime * this.height);
+    return Math.floor(time/maxTime * this.height) + this.margin + this.xAxis;
   }
 
   calculateHeight(block) {
@@ -199,35 +220,16 @@ export default class CalendarSvg{
 function getColor(color) {
   switch (color) {
     case 'Angie':
-      return '#9CEC5B';
+      return colors.brand_orange;
     case 'Swimming':
-      return '#6184DB';
+      return colors.brand_blue_20;
     case 'Training':
-      return '#50C5B7';
+      return colors.brand_orange_10;
     case 'Project ICT':
-      return '#533A71';
+      return colors.brand_blue;
     case 'Wash dishes':
-      return '#F0F465';
+      return colors.brand_blue_10;
     default:
-      return '#666';
+      return colors.brand_orange_30;
   }
-}
-function darkenColorPercent(color, amount) {
-  amount = (100 + amount) / 100;
-  const number = parseInt(color.slice(1), 16);
-  const red    = Math.floor((number >> 16) * amount);
-  const green  = Math.floor((number >> 8 & 0x00FF) * amount);
-  const blue   = Math.floor((number & 0x0000FF) * amount);
-  console.log(red, green, blue);
-  return `#${red > 255 ? 255 : red.toString(16)}${green > 255 ? 255 : green.toString(16)}${blue > 255 ? 255 : blue.toString(16)}`;
-}
-
-
-function darkenColor(color, amount) {
-  const number = parseInt(color.slice(1), 16);
-  const red    = (number >> 16) + amount;
-  const green  = (number >> 8 & 0x00FF) + amount;
-  const blue   = (number & 0x0000FF) + amount;
-
-  return `#${red > 255 ? 255 : red.toString(16)}${green > 255 ? 255 : green.toString(16)}${blue > 255 ? 255 : blue.toString(16)}`;
 }

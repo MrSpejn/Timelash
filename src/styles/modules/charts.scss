@@ -1,0 +1,43 @@
+#pie-chart {
+  display: block;
+  margin: 0 auto;
+}
+#line-chart {
+  display: block;
+  margin: 0 auto;
+
+  .line {
+    fill: none;
+    stroke-width: 3;
+  }
+  circle{
+    width: 20px;
+    height: 20px;
+  }
+  .area-blue{
+    fill: url(#gradient-blue);
+  }
+  .area-orange{
+    fill: url(#gradient-orange);
+  }
+}
+#line-chart .axis{
+  path, line {
+    fill: none;
+    stroke: black;
+  }
+  .path{
+    stroke: none;
+  }
+  .line {
+    fill: none;
+    stroke: blue;
+    stroke-width: 1px;
+  }
+  .tick text{
+    font-size: 12px;
+  }
+  .tick line{
+    opacity: 0.2;
+  }
+}

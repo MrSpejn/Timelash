@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {setShadow, strokeCircle} from '../../utilities/canvas';
+import * as colors from '../../colors';
 
 export default class ProgressTimeCanvas extends Component {
   componentDidMount() {
@@ -18,9 +19,7 @@ export default class ProgressTimeCanvas extends Component {
 
   render() {
     return (
-        <canvas className='progress-box__canvas'
-                width='400'
-                height='400'
+        <canvas width="330" height="330" className='progress-box__canvas'
                 ref={(el) => this._canvas = el} >
         </canvas>
     );
@@ -28,18 +27,18 @@ export default class ProgressTimeCanvas extends Component {
 
   paintRing(degrees) {
     const ringWidth = 30;
-    const canvasWidth = 400;
-    const canvasHeight = 400;
+    const canvasWidth = 330;
+    const canvasHeight = 330;
     const ctx = this.context;
 
     ctx.save();
 
     /* Create full circle with shadow*/
-    ctx.fillStyle = '#6CD5FA';
-    ctx.fillRect(0, 0, 400, 400);
+    ctx.fillStyle = colors.brand_orange_30;
+    ctx.fillRect(0, 0, canvasWidth, canvasHeight);
     ctx.lineWidth = ringWidth;
-    ctx.strokeStyle = '#6CD5FA';
-    ctx.setShadow(5, 5, 2, '#3daed3');
+    ctx.strokeStyle = colors.brand_orange_30;
+    ctx.setShadow(5, 5, 2, colors.brand_orange_20);
 
     ctx.strokeCircle(canvasHeight/2, canvasWidth/2, (canvasWidth+ringWidth) / 2);
     ctx.strokeCircle(canvasHeight/2, canvasWidth/2, (canvasWidth - 3*ringWidth) / 2);
@@ -48,14 +47,14 @@ export default class ProgressTimeCanvas extends Component {
     /* Set clip path to trim progress circle and shadows */
     ctx.beginPath();
     ctx.arc(canvasHeight/2, canvasWidth/2, canvasWidth/2, radians(-90), radians(degrees-90));
-    ctx.lineTo(200, 200);
+    ctx.lineTo(canvasHeight/2, canvasWidth/2);
     ctx.clip();
 
-    ctx.strokeStyle = '#22c0f7';
+    ctx.strokeStyle = colors.brand_orange_10;
     ctx.setShadow();
     ctx.strokeCircle(canvasHeight/2, canvasWidth/2, (canvasWidth-ringWidth) / 2);
 
-    ctx.setShadow(5, 5, 2, '#0794c5');
+    ctx.setShadow(5, 5, 2, colors.brand_orange);
     ctx.strokeCircle(canvasHeight/2, canvasWidth/2, (canvasWidth+ringWidth) / 2);
     ctx.strokeCircle(canvasHeight/2, canvasWidth/2, (canvasWidth - 3*ringWidth) / 2);
 

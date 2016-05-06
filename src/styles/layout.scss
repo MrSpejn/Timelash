@@ -1,0 +1,62 @@
+.app-section {
+  background-color: $light-white-color;
+  width: 90%;
+  margin: 0 auto 20px;
+  overflow: hidden;
+
+}
+.l-col-section {
+  background-color: $light-white-color;
+  margin: 0 auto 40px;
+  overflow: hidden;
+}
+.flex-row {
+  width: 100%;
+  flex-wrap: nowrap;
+  justify-content: center;
+  display: flex;
+}
+
+
+.section-title {
+  font-size: 16px;
+  width: 100%;
+  color: #888;
+  margin: 0;
+  padding-left: 30px;
+  text-align: left;
+  height: 40px;
+  line-height: 40px;
+  position: relative;
+  box-shadow: 0 5px 4px -4px #aaa;
+  position: relative;
+  z-index: 5;
+}
+.app-row {
+  @extend .row;
+  width: 90%;
+  margin: 0 auto;
+
+  &>*{
+    padding: 0;
+  }
+}
+
+.app-section-title {
+  margin: 10px auto 0;
+  box-shadow: 0 5px 4px -4px #aaa;
+  width: 90%;
+  height: 30px;
+  background-color: $light-white-color;
+  color: #888;
+  text-align: left;
+  font-size: 16px;
+  line-height: 30px;
+  padding-left: 30px;
+  position: relative;
+  z-index: 5;
+}
+
+.embrace, .signin, .signout {
+  margin-top: 150px;
+}

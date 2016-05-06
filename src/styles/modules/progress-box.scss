@@ -1,15 +1,15 @@
 @import '../variables.scss';
 
+$canvas-width: 330px;
+$canvas-height: 330px;
 .progress-box {
-  width: 400px;
-  height: 400px;
+  width: $canvas-width;
+  height: $canvas-height;
   color: $light-blue-color;
   background-color: $light-blue-color;
   border-radius: 100%;
-  margin: 0 auto;
+  margin: 20px auto;
   position: relative;
-  //box-shadow: inset 5px 5px 2px $light-blue-shadow-color;
-
 }
 
 .progress-box__timer{
@@ -18,8 +18,9 @@
   top: 50%;
   transform: translateY(-50%);
   text-align: center;
+  color: $brand_blue;
   left: 0;
-  font-size: 56px;
+  font-size: 48px;
   width: 100%;
 }
 
@@ -30,24 +31,24 @@
   width: 100%;
   text-align: center;
   left: 0;
-  color: $medium-blue-shadow-color;
-  font-size: 32px;
+  color: $brand_blue_20;
+  font-size: 28px;
 }
 
 .progress-box__controls{
   width: 100%;
   position: absolute;
   z-index: 11;
-  top: 260px;
+  top: 220px;
   text-align: center;
   left: 0;
 
 }
 .progress-box__controls button{
-  background-color: $light-blue-shadow-color;
+  background-color: $brand-orange-20;
   color: #fff;
   border: none;
-  font-size: 28px;
+  font-size: 24px;
   margin: 0 6px;
   cursor: pointer;
 }
@@ -55,7 +56,7 @@
   outline: none;
 }
 .progress-box__controls button:hover{
-  background-color: #08a7de;
+  background-color: $brand-orange-10;
 }
 
 .progress-box__canvas {
@@ -63,8 +64,8 @@
   z-index: 2;
   top: 0;
   left: 0;
-  width: 400px;
-  height: 400px;
+  width: $canvas-width;
+  height: $canvas-height;
 
   border-radius: 50%;
 }
@@ -76,8 +77,8 @@
   content: '';
   top: 30px;
   left: 30px;
-  width: 340px;
-  height: 340px;
+  width: $canvas-width - 60px;
+  height: $canvas-height - 60px;
 
 }
 
