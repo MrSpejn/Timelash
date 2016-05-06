@@ -1,0 +1,33 @@
+.activity-supervisor{
+  width: 100%;
+  min-height: 100%;
+  background-color: $dark-white-color;
+  overflow: auto;
+  padding-top: 80px;
+}
+
+.recent-history-module, .progress-module, .category-list-module{
+  background-color: $light-white-color;
+  padding: 0;
+  color: #888;
+  border-radius: 2px;
+  box-shadow: 1px 1px 3px #aaa;
+  &:not(:first-child) {
+    margin-left: 10px;
+  }
+}
+.progress-module {
+  min-height: 500px;
+  width: 500px;
+}
+.recent-history-module {}
+.category-list-module {
+  width: 200px;
+}
+
+.choose-activity{
+  margin-top: 120px;
+  text-align: center;
+  color: $brand-blue-20;
+  font-size: 32px;
+}

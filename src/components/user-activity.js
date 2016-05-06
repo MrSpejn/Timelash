@@ -17,26 +17,31 @@ class UserActivity extends Component {
   }
 
   render() {
-    let progressBox;
+    const encourageChoosing = (
+      <h3 className="choose-activity">Choose activity</h3>
+    );
 
-    if (this.props.progress) {
-      progressBox = <ProgressBox />;
-    }
-    else {
-      progressBox = <h3 className="choose-activity">Choose activity</h3>;
-    }
 
     return  (
 
       <div className="activity-supervisor">
-        <div className="current-activity-wrapper">
-          {progressBox}
-        </div>
-        <ActivitiesList />
-        <div className="done-activties-wrapper">
-          <HistoryList history={this.props.history}/>
-        </div>
+        <div className="flex-row">
+          <div className="category-list-module">
+            <h2 className="section-title">Activity categories</h2>
+            <ActivitiesList />
+          </div>
+          <div className="progress-module">
+            <h2 className="section-title">Activity progress</h2>
+            {this.props.progress ? <ProgressBox /> : encourageChoosing}
+          </div>
 
+          <div className="col-md-3 recent-history-module">
+            <h2 className="section-title">Recently ended activities</h2>
+            <HistoryList history={this.props.history}/>
+          </div>
+
+
+        </div>
       </div>
     );
   }
