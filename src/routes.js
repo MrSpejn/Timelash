@@ -8,6 +8,7 @@ import Embrace                  from './components/embrace';
 import Signin                   from './components/auth/signin';
 import Signout                  from './components/auth/signout';
 import CalendarWeekly           from './components/dashboard/calendar-weekly';
+import ColorShowcase            from './components/color-showcase';
 
 import RequireAuth              from './containers/require-auth';
 
@@ -27,6 +28,7 @@ export default (
     <Route path='/signout' component={Signout} />
     <Route path='/activity' component={RequireAuth(UserActivity)} />
     <Route path='/dashboard' component={RequireAuth(Dashboard)} />
+    <Route path='/color-showcase' component={ColorShowcase} />
     <Route path='/dashboard/weekly' component={RequireAuth(CalendarWeekly)} />
   </Route>
 );

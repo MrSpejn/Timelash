@@ -6,3 +6,54 @@ $light-blue-color: #6CD5FA;
 $light-blue-shadow-color: #3daed3;
 $medium-blue-color: #22c0f7;
 $medium-blue-shadow-color: #0794c5;
+
+$dark-white-color: #F7F7F7;
+$light-white-color: #FFFFFF;
+
+
+
+$brand-blue: #1F77B4;
+$brand-blue-10d: darken($brand-blue, 10%);
+$brand-blue-20d: darken($brand-blue, 20%);
+$brand-blue-30d: darken($brand-blue, 30%);
+$brand-blue-10: lighten($brand-blue, 10%);
+$brand-blue-20: lighten($brand-blue, 20%);
+$brand-blue-30: lighten($brand-blue, 30%);
+
+$brand-orange: #FF7F0E;
+$brand-orange-10: lighten($brand-orange, 10%);
+$brand-orange-20: lighten($brand-orange, 20%);
+$brand-orange-30: lighten($brand-orange, 30%);
+
+.bg-white-dark {
+  background-color: $dark-white-color;
+}
+.bg-white-light {
+  background-color: $light-white-color;
+}
+
+.bg-blue{
+  background-color: $brand-blue;
+}
+.bg-blue-10{
+  background-color: $brand-blue-10;
+}
+.bg-blue-20{
+  background-color: $brand-blue-20;
+}
+.bg-blue-30{
+  background-color: $brand-blue-30;
+}
+
+.bg-orange{
+  background-color: $brand-orange;
+}
+.bg-orange-10{
+  background-color: $brand-orange-10;
+}
+.bg-orange-20{
+  background-color: $brand-orange-20;
+}
+.bg-orange-30{
+  background-color: $brand-orange-30;
+}
