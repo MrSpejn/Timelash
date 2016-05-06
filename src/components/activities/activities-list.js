@@ -4,7 +4,7 @@ import {bindActionCreators}      from 'redux';
 import _                         from 'lodash';
 import {startProgress}           from 'actions/progress';
 
-class ChooseActivityList extends Component {
+class ActivityList extends Component {
   startProgressIfPossible(progress) {
     const current = this.props.progress;
     if (!current || current.time === current.checkpoint) {
@@ -18,9 +18,9 @@ class ChooseActivityList extends Component {
     const categories = _.uniq(this.props.activities.map(a => a.category));
     return categories.map(cat => {
       return (
-        <li key={cat}>
+        <li className="activity-list__category" key={cat}>
           {cat}
-          <ul>{this.renderItems(cat)}</ul>
+          <ul className="activity-list__category-sublist">{this.renderItems(cat)}</ul>
         </li>
       );
     });
@@ -41,7 +41,7 @@ class ChooseActivityList extends Component {
 
   render() {
     return (
-      <ul className='choose-activity-list'>
+      <ul className='activity-list'>
         {this.renderCategories()}
       </ul>
     );
@@ -57,4 +57,4 @@ function mapStateToProps(state) {
     activities: state.profile.activities
   };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ChooseActivityList);
+export default connect(mapStateToProps, mapDispatchToProps)(ActivityList);
