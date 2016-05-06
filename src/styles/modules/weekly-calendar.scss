@@ -1,5 +1,4 @@
 .weekly-calendar-module{
-  position: relative;
   min-height: 100%;
   margin: 0 auto;
   background-color: $dark-white-color;
@@ -21,8 +20,10 @@
       width: calc(100% / 7);
     }
   }
-
-  &__calendar-hint{
+  &__hint-container {
+    position: relative;
+  }
+  &__hint{
     box-sizing: border-box;
     width: 200px;
     background-color: #172A37;

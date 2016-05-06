@@ -23,7 +23,7 @@ export default class CalendarWeeklyComponent extends Component{
     calendar.onElementMouseOver((element, story) => {
       const hintOptions = {
         x: parseInt(element.node.attributes.x.value),
-        y: parseInt(element.node.attributes.y.value) + 90,
+        y: parseInt(element.node.attributes.y.value),
         targetWidth: parseInt(element.node.attributes.width.value),
         item: story
       };
@@ -43,10 +43,12 @@ export default class CalendarWeeklyComponent extends Component{
   render() {
     return (
       <div className="weekly-calendar-module">
-        {this.state.shouldDisplayHint ? <CalendarHint options={this.state.hintOptions}/> : <div></div>}
         <div className="weekly-calendar">
           <h3 className="section-title">Calendar of weekly activities</h3>
-          <svg id="calendar" width="1036" height="500"></svg>
+          <div className="weekly-calendar__hint-container">
+            {this.state.shouldDisplayHint && <CalendarHint options={this.state.hintOptions}/>}
+            <svg id="calendar" width="1036" height="500"></svg>
+          </div>
         </div>
       </div>
     )
