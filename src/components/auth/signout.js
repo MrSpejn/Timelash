@@ -7,7 +7,7 @@ class Signout extends Component{
     this.props.userSignout();
   }
   render() {
-    return (<h2>Goodbye, our dear friend</h2>);
+    return (<h2 className="signout">Goodbye, our dear friend</h2>);
   }
 }
 export default connect(null, {userSignout})(Signout);
