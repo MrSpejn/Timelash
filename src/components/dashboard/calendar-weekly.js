@@ -20,7 +20,7 @@ export default class CalendarWeeklyComponent extends Component{
   componentDidMount() {
     const calendar = new CalendarSvg('#calendar');
 
-    calendar.onElementMouseOver((element, story, event) => {
+    calendar.onElementMouseOver((element, story) => {
       const hintOptions = {
         x: parseInt(element.node.attributes.x.value),
         y: parseInt(element.node.attributes.y.value) + 90,
@@ -33,7 +33,7 @@ export default class CalendarWeeklyComponent extends Component{
       });
     });
 
-    calendar.onElementMouseOut((element, story, event) => {
+    calendar.onElementMouseOut(() => {
       this.setState({
         shouldDisplayHint: false
       });

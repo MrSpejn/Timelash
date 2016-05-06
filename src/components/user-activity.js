@@ -53,7 +53,7 @@ class UserActivity extends Component {
 function mapStateToProps(state) {
   return {
     history: state.history,
-    progress: state.progress,
+    progress: state.progress
   };
 }
 

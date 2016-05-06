@@ -7,7 +7,7 @@ export function updateProfile(profile) {
   return dispatch => {
     const token = localStorage.getItem('token');
     axios.put(API_URL, profile, {headers: {authorization: token}})
-    .then(res => {
+    .then(() => {
       dispatch({
         type: UPDATE_PROFILE,
         payload: profile

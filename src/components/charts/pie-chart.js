@@ -23,7 +23,7 @@ class PieChart extends Component{
          .enter()
          .append('g')
          .attr('class', 'arc')
-         .attr("transform", `translate(${width / 2},${height - 10})`)
+         .attr('transform', `translate(${width / 2},${height - 10})`)
          .append('path')
          .attr('fill', (d, i) => color(i))
          .attr('d', d => {
@@ -48,7 +48,7 @@ class PieChart extends Component{
   }
 
   render() {
-    return <svg height="180" id={this.props.name}></svg>
+    return <svg height='180' id={this.props.name}></svg>
   }
 }
 export default PieChart;

@@ -31,7 +31,7 @@ class PieChart extends Component{
 
     const xAxis = d3.svg.axis()
     .scale(xScale)
-    .orient("bottom")
+    .orient('bottom')
     .ticks(11)
     .innerTickSize(-height+20)
     .outerTickSize(0)
@@ -39,7 +39,7 @@ class PieChart extends Component{
 
     const yAxis = d3.svg.axis()
     .scale(yScale)
-    .orient("left")
+    .orient('left')
     .ticks(12)
     .innerTickSize(-width)
     .outerTickSize(0)
@@ -54,7 +54,7 @@ class PieChart extends Component{
     const area = d3.svg.area().x(d => xScale(d.index)).y1(d => yScale(d.value)).y0(height).interpolate('monotone');
 
 
-    const svg = d3.select("#line-chart");
+    const svg = d3.select('#line-chart');
     svg.append('g').call(xAxis).attr('class', 'x axis').attr('transform', `translate(0, ${height})`);
     svg.append('g').call(yAxis).attr('class', 'y axis').attr('transform', `translate(${margin}, 0)`);
 
@@ -83,17 +83,17 @@ class PieChart extends Component{
 
   render() {
     return (
-      <svg id="line-chart" height="360">
+      <svg id='line-chart' height='360'>
         <defs>
-          <linearGradient id="gradient-blue" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" style={{"stopColor": "rgb(31, 119, 180)", "stopOpacity": "0.07"}} />
-            <stop offset="10%" style={{"stopColor": "rgb(31, 119, 180)", "stopOpacity": "0.12"}} />
-            <stop offset="50%" style={{"stopColor": "rgb(31, 119, 180)", "stopOpacity": "0"}} />
+          <linearGradient id='gradient-blue' x1='0%' y1='0%' x2='0%' y2='100%'>
+            <stop offset='0%' style={{'stopColor': 'rgb(31, 119, 180)', 'stopOpacity': '0.07'}} />
+            <stop offset='10%' style={{'stopColor': 'rgb(31, 119, 180)', 'stopOpacity': '0.12'}} />
+            <stop offset='50%' style={{'stopColor': 'rgb(31, 119, 180)', 'stopOpacity': '0'}} />
           </linearGradient>
-          <linearGradient id="gradient-orange" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" style={{"stopColor": "rgb(255, 127, 14)", "stopOpacity": "0.07"}} />
-            <stop offset="30%" style={{"stopColor": "rgb(255, 127, 14)", "stopOpacity": "0.12"}} />
-            <stop offset="100%" style={{"stopColor": "rgb(255, 127, 14)", "stopOpacity": "0"}} />
+          <linearGradient id='gradient-orange' x1='0%' y1='0%' x2='0%' y2='100%'>
+            <stop offset='0%' style={{'stopColor': 'rgb(255, 127, 14)', 'stopOpacity': '0.07'}} />
+            <stop offset='30%' style={{'stopColor': 'rgb(255, 127, 14)', 'stopOpacity': '0.12'}} />
+            <stop offset='100%' style={{'stopColor': 'rgb(255, 127, 14)', 'stopOpacity': '0'}} />
           </linearGradient>
         </defs>
       </svg>
