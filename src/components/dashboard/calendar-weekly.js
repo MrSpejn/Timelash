@@ -1,6 +1,5 @@
 import React, {Component}     from 'react';
 import moment                 from 'moment';
-
 import CalendarSvg            from '../../utilities/svg-calendar';
 import CalendarHint           from './calendar-hint';
 
@@ -41,22 +40,14 @@ export default class CalendarWeeklyComponent extends Component{
     });
   }
 
-  renderHeaders() {
-    return this.days.map((date, i) => {
-      return (
-        <li key={i}>
-          {date.format('Do MMM')}
-        </li>
-      );
-    });
-  }
-
   render() {
     return (
-      <div className="weekly-calendar">
-        <ul className="weekly-calendar__header">{this.renderHeaders()}</ul>
+      <div className="weekly-calendar-module">
         {this.state.shouldDisplayHint ? <CalendarHint options={this.state.hintOptions}/> : <div></div>}
-        <svg id="calendar" width="1036" height="600"></svg>
+        <div className="weekly-calendar">
+          <h3 className="section-title">Calendar of weekly activities</h3>
+          <svg id="calendar" width="1036" height="500"></svg>
+        </div>
       </div>
     )
   }
