@@ -1,0 +1,24 @@
+.month-activity-density {
+  &__header {
+    text-align: center;
+    color: $brand-orange;
+    margin-top: 10px;
+    font-size: 16px;
+  }
+
+  &__control {
+    cursor: pointer;
+    &--disabled {
+      cursor: default;
+      color: $gray-1;
+      &:hover, &:active, &:focus{
+        color: $gray-1;
+      }
+    }
+  }
+
+  &__current-value {
+    display: inline-block;
+    width: 100px;
+  }
+}
