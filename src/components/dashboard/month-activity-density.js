@@ -34,7 +34,7 @@ class MonthActivityDensity extends Component {
                     month={this.state.month}
                     width='100%'
                     height='260'
-                    margins={{top: 10, left: 40}}/>
+                    margins={{top: 24, left: 40, right: 40}}/>
       </div>
     );
   }

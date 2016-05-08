@@ -23,35 +23,32 @@ class MonthChart extends Component {
         left = margins.left || 0;
       }
     }
-
+    const _this = this;
     const innerWidth = document.getElementById(this.props.id).clientWidth - left - right;
     const innerHeight= this.props.height - top - bottom;
     const chart      = d3.select(`#${this.props.id}`);
-    const xScale     = d3.scale.linear().range([left, innerWidth + right]).domain([0, 7]);
 
     this.beginDate   = this.getBeginningDate();
     this.endDate     = this.getEndingDate();
-    const days       = d3.range(this.endDate.diff(this.beginDate, 'days') + 1)
-                         .map(offset => {
-                           return {
-                             offset: offset,
-                             date: this.beginDate.clone().add(offset, 'days'),
-                             spent: Math.random() * 4
-                           };
-                         });
+    const days       = this.createPlaceholderData();
 
-    const yScale    = d3.scale.linear().range([top, innerHeight + bottom])
+    const xScale     = d3.scale.linear().range([left, innerWidth + left]).domain([0, 7]);
+    const yScale     = d3.scale.linear().range([top, innerHeight + top])
                         .domain([0, (days.length / 7)]);
 
-    const _this = this;
+    const cellWidth  = innerWidth / 7;
+    const cellHeight = innerHeight / (days.length / 7);
+
+    this.drawHeader(chart, xScale, innerWidth);
+
     chart.append('g').selectAll('.day').data(days).enter().append('rect')
       .attr('fill', day => this.controlFillColor(day))
       .attr('class', day => `day ${day.valid ? 'valid' : 'invalid'}`)
       .style({
         'stroke-width': 1,
         'stroke': colors.gray_light,
-        'width' : innerWidth / 7 - 6,
-        'height': innerHeight / (days.length / 7),
+        'width' : cellWidth,
+        'height': cellHeight,
         x: day => xScale(day.offset % 7),
         y: day => yScale(Math.floor(day.offset / 7))
       })
@@ -64,6 +61,28 @@ class MonthChart extends Component {
         if (d.valid) {
           d3.select(this).attr('fill', _this.controlFillColor(d), 40);
         }
+      });
+  }
+
+  drawHeader(chart, xScale, innerWidth) {
+    const values = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+    chart.selectAll('.heading').data(d3.range(7)).enter().append('text')
+         .attr('class', 'heading')
+         .attr('text-anchor', 'middle')
+         .text(i => values[i])
+         .attr('x', day => xScale(day) + (innerWidth / 14))
+         .attr('y', 20);
+  }
+
+  createPlaceholderData() {
+    return d3.range(this.endDate.diff(this.beginDate, 'days') + 1)
+      .map(offset => {
+        return {
+          offset: offset,
+          date: this.beginDate.clone().add(offset, 'days'),
+          spent: Math.random() * 4
+        };
       });
   }
 
