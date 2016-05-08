@@ -1,43 +1,66 @@
-#pie-chart {
+.line-chart {
   display: block;
-  margin: 0 auto;
-}
-#line-chart {
-  display: block;
-  margin: 0 auto;
 
   .line {
     fill: none;
     stroke-width: 3;
   }
-  circle{
-    width: 20px;
-    height: 20px;
+  .line-brand-orange{
+    stroke: $brand-orange;
   }
-  .area-blue{
+  .line-brand-blue{
+    stroke: $brand-blue;
+  }
+  circle{
+    width: 8px;
+    height: 8px;
+    cursor: pointer;
+
+    &.circle-brand-blue {
+      fill: $brand-blue;
+    }
+    &.circle-brand-orange {
+      fill: $brand-orange;
+    }
+  }
+  .area-brand-blue{
     fill: url(#gradient-blue);
   }
-  .area-orange{
+  .area-brand-orange{
     fill: url(#gradient-orange);
   }
+  .aura {
+    transition: stroke .5s ease;
+    fill: none;
+    stroke-width: 1;
+  }
 }
-#line-chart .axis{
+
+.line-chart .axis{
   path, line {
     fill: none;
-    stroke: black;
+    stroke: #888;
+    stroke-width: 0.5;
   }
   .path{
     stroke: none;
   }
   .line {
     fill: none;
-    stroke: blue;
+    stroke: #888;
     stroke-width: 1px;
   }
   .tick text{
+    fill: #888;
     font-size: 12px;
   }
   .tick line{
     opacity: 0.2;
+  }
+}
+
+.month-chart{
+  rect.valid:hover{
+    cursor: pointer;
   }
 }

@@ -5,20 +5,81 @@ let width  = 920;
 let height = 400;
 let margin = 40;
 
-class PieChart extends Component{
+class LineChart extends Component {
   componentDidMount() {
-    width = document.getElementById('line-chart').clientWidth - 2 * margin;
-    height = document.getElementById('line-chart').clientHeight - 20;
+    width = document.getElementById(this.props.id).clientWidth - margin;
+    height = document.getElementById(this.props.id).clientHeight - 20;
 
-    const xScale = d3.scale.linear().range([margin, width + margin]);
+    const {data, data2} = this.generatePlaceholderData();
+    const chartData = [data, data2].map((d, i) => {
+      const colors = [ 'brand-blue', 'brand-orange'];
+      return {  data: d, color: colors[i] };
+    });
+    const {xScale, yScale} = this.createScales(data);
+    const {xAxis, yAxis} = this.createAxis(xScale, yScale);
+    const svg = d3.select(`#${this.props.id}`);
+
+    svg.append('g').call(xAxis).attr('class', 'x axis').attr('transform', `translate(0, ${height})`);
+    svg.append('g').call(yAxis).attr('class', 'y axis').attr('transform', `translate(${margin}, 0)`);
+
+    svg.append('circle').attr('class', 'aura').style({'r': 8, cx: -10, cy: -10});
+    chartData.forEach((d) => {
+      this.drawLine(d, svg, xScale, yScale);
+    });
+  }
+
+  createScales(data) {
+    const xScale = d3.scale.linear().range([margin, width + margin - 8]);
     const yScale = d3.scale.linear().range([height, 20]);
-    const base = Math.random();
+    xScale.domain([1, d3.max(data, d => d.index)]);
+    yScale.domain([0, 1]);
+    return {xScale, yScale};
+  }
 
-    const data = d3.range(20).map((v, i) => {
+  createAxis(xScale, yScale) {
+    const xAxis = d3.svg.axis().scale(xScale).orient('bottom').ticks(11)
+                    .innerTickSize(-height+20).outerTickSize(0).tickPadding(10);
+
+    const yAxis = d3.svg.axis().scale(yScale).orient('left').ticks(12)
+                    .innerTickSize(-width+8).outerTickSize(0).tickPadding(10);
+
+    return {xAxis, yAxis};
+  }
+
+  drawLine(obj, chart, xScale, yScale) {
+    const line = d3.svg.line().x(d => xScale(d.index)).y(d => yScale(d.value));
+    line.interpolate('monotone');
+    const area = d3.svg.area().x(d => xScale(d.index)).y1(d => yScale(d.value)).y0(height);
+    area.interpolate('monotone');
+
+    chart.append('path').attr('class', `line line-${obj.color}`).attr('d', line(obj.data));
+    chart.append('path').attr('d', area(obj.data)).attr('class', `area-${obj.color}`);
+    chart.selectAll(`.circle-${obj.color}`).data(obj.data).enter()
+         .append('circle')
+         .attr('class', `circle-${obj.color}`).style({
+           'r': 5,
+           cx: (d) => xScale(d.index),
+           cy: (d) => yScale(d.value)
+         })
+         .on('mouseover', function (d) {
+           chart.select('.aura').attr('class', `aura line-${obj.color}`)
+           .style({
+             cx: xScale(d.index),
+             cy: yScale(d.value)
+           });
+         })
+         .on('mouseout', function () {
+           chart.select('.aura').style({cx: -10, cy: -10});
+         })
+  }
+
+  generatePlaceholderData() {
+    const base = Math.random();
+    const data = d3.range(14).map((v, i) => {
       const value = base - (Math.random() * 0.1);
       return {
         value: value > .5 ? value : value + .5,
-        index: i
+        index: i + 1
       };
     });
     const data2 = data.map(({value: v, index: i}) => {
@@ -28,62 +89,12 @@ class PieChart extends Component{
         index: i
       };
     });
-
-    const xAxis = d3.svg.axis()
-    .scale(xScale)
-    .orient('bottom')
-    .ticks(11)
-    .innerTickSize(-height+20)
-    .outerTickSize(0)
-    .tickPadding(10);
-
-    const yAxis = d3.svg.axis()
-    .scale(yScale)
-    .orient('left')
-    .ticks(12)
-    .innerTickSize(-width)
-    .outerTickSize(0)
-    .tickPadding(10);
-
-    xScale.domain([0, d3.max(data, d => d.index)]);
-    yScale.domain([0, 1]);
-
-
-
-    const line = d3.svg.line().x(d => xScale(d.index)).y(d => yScale(d.value)).interpolate('monotone');
-    const area = d3.svg.area().x(d => xScale(d.index)).y1(d => yScale(d.value)).y0(height).interpolate('monotone');
-
-
-    const svg = d3.select('#line-chart');
-    svg.append('g').call(xAxis).attr('class', 'x axis').attr('transform', `translate(0, ${height})`);
-    svg.append('g').call(yAxis).attr('class', 'y axis').attr('transform', `translate(${margin}, 0)`);
-
-    svg.append('path').attr('class', 'line').attr('stroke', '#1F77B4').attr('d', line(data));
-    svg.append('path').attr('class', 'area-blue').attr('d', area(data));
-    svg.append('path').attr('class', 'line').attr('stroke', 'rgb(255, 127, 14)').attr('d', line(data2));
-    svg.append('path').attr('class', 'area-orange').attr('d', area(data2));
-
-
-    svg.selectAll('.circle-blue').data(data).enter().append('circle')
-      .attr('class', 'circle-blue')
-      .attr('r', 5)
-      .attr('fill', '#1F77B4')
-      .attr('cx', (d) => xScale(d.index))
-      .attr('cy', (d) => yScale(d.value));
-
-    svg.selectAll('.circle-orange').data(data2).enter().append('circle')
-      .attr('class', 'circle-orange')
-      .attr('r', 5)
-      .attr('fill', 'rgb(255, 127, 14)')
-      .attr('cx', (d) => xScale(d.index))
-      .attr('cy', (d) => yScale(d.value));
-
-
+    return {data, data2};
   }
 
   render() {
     return (
-      <svg id='line-chart' height='360'>
+      <svg className='line-chart' {...this.props}>
         <defs>
           <linearGradient id='gradient-blue' x1='0%' y1='0%' x2='0%' y2='100%'>
             <stop offset='0%' style={{'stopColor': 'rgb(31, 119, 180)', 'stopOpacity': '0.07'}} />
@@ -100,4 +111,4 @@ class PieChart extends Component{
   );
   }
 }
-export default PieChart;
+export default LineChart;
