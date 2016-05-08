@@ -1,27 +1,8 @@
-.weekly-calendar-module{
-  min-height: 100%;
-  margin: 0 auto;
-  background-color: $dark-white-color;
-  padding: 40px 5% 0;
-}
 
 .weekly-calendar {
-  width: 100%;
-  background-color: $light-white-color;
-  margin-top: 40px;
-  &__header{
-    color: #172A37;
-    box-sizing: border-box;
-    padding-left: calc(100% / 8);
-    margin-right: 62px;
-    li {
-      text-align: center;
-      display: inline-block;
-      width: calc(100% / 7);
-    }
-  }
   &__hint-container {
     position: relative;
+    z-index: 5;
   }
   &__hint{
     box-sizing: border-box;
@@ -60,23 +41,5 @@
       border-right: 10px solid #172A37;
     }
 
-  }
-
-  #calendar {
-
-    width: 100%;
-    display: block;
-    background-color: $light-white-color;
-    rect:hover{
-      cursor: pointer;
-    }
-    line{
-      shape-rendering: crispEdges;
-      stroke-width: 1;
-      stroke: #ddd;
-    }
-    text {
-      fill: #888;
-    }
   }
 }

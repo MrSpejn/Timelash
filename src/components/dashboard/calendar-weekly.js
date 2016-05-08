@@ -42,14 +42,9 @@ export default class CalendarWeeklyComponent extends Component{
 
   render() {
     return (
-      <div className="weekly-calendar-module">
-        <div className="weekly-calendar">
-          <h3 className="section-title">Calendar of weekly activities</h3>
-          <div className="weekly-calendar__hint-container">
-            {this.state.shouldDisplayHint && <CalendarHint options={this.state.hintOptions}/>}
-            <svg id="calendar" width="1036" height="500"></svg>
-          </div>
-        </div>
+      <div className="weekly-calendar__hint-container">
+        {this.state.shouldDisplayHint && <CalendarHint options={this.state.hintOptions}/>}
+        <svg id="calendar" width="100%" height="500"></svg>
       </div>
     )
   }

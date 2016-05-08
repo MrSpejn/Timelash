@@ -8,97 +8,97 @@ const MILISECONDS_IN_DAY = 1000 * SECONDS_IN_DAY;
 
 const fakeData = [
   {
-    date: moment(new Date('May 4 2016 9:00:00 GMT+0200')),
+    date: moment(new Date('May 11 2016 9:00:00 GMT+0200')),
     time: 7900,
     name: 'Training'
   },
   {
-    date: moment(new Date('May 1 2016 9:30:00 GMT+0200')),
+    date: moment(new Date('May 8 2016 9:30:00 GMT+0200')),
     time: 3600,
     name: 'Training'
   },
   {
-    date: moment(new Date('May 3 2016 14:00:00 GMT+0200')),
+    date: moment(new Date('May 10 2016 14:00:00 GMT+0200')),
     time: 7200,
     name: 'Training'
   },
   {
-    date: moment(new Date('May 3 2016 9:00:00 GMT+0200')),
+    date: moment(new Date('May 10 2016 9:00:00 GMT+0200')),
     time: 18000,
     name: 'Angie'
   },
   {
-    date: moment(new Date('May 1 2016 16:47:00 GMT+0200')),
+    date: moment(new Date('May 8 2016 16:47:00 GMT+0200')),
     time: 4500,
     name: 'Swimming'
   },
   {
-    date: moment(new Date('May 1 2016 10:30:00 GMT+0200')),
+    date: moment(new Date('May 8 2016 10:30:00 GMT+0200')),
     time: 5400,
     name: 'Angie'
   },
   {
-    date: moment(new Date('May 1 2016 16:17:00 GMT+0200')),
+    date: moment(new Date('May 8 2016 16:17:00 GMT+0200')),
     time: 1800,
     name: 'Wash dishes'
   },
   {
-    date: moment(new Date('May 3 2016 8:00:00 GMT+0200')),
+    date: moment(new Date('May 10 2016 8:00:00 GMT+0200')),
     time: 3600,
     name: 'Project ICT'
   },
   {
-    date: moment(new Date('May 2 2016 10:00:00 GMT+0200')),
+    date: moment(new Date('May 9 2016 10:00:00 GMT+0200')),
     time: 10800,
     name: 'Swimming'
   },
   {
-    date: moment(new Date('May 4 2016 12:30:00 GMT+0200')),
+    date: moment(new Date('May 11 2016 12:30:00 GMT+0200')),
     time: 6400,
     name: 'Project ICT'
   },
   {
-    date: moment(new Date('May 5 2016 13:00:00 GMT+0200')),
+    date: moment(new Date('May 12 2016 13:00:00 GMT+0200')),
     time: 7200,
     name: 'Swimming'
   },
   {
-    date: moment(new Date('May 3 2016 16:00:00 GMT+0200')),
+    date: moment(new Date('May 10 2016 16:00:00 GMT+0200')),
     time: 5400,
     name: 'Project ICT'
   },
   {
-    date: moment(new Date('May 6 2016 12:30:00 GMT+0200')),
+    date: moment(new Date('May 13 2016 12:30:00 GMT+0200')),
     time: 5400,
     name: 'Training'
   },
   {
-    date: moment(new Date('May 1 2016 12:00:00 GMT+0200')),
+    date: moment(new Date('May 8 2016 12:00:00 GMT+0200')),
     time: 15400,
     name: 'Project ICT'
   },
   {
-    date: moment(new Date('May 5 2016 10:00:00 GMT+0200')),
+    date: moment(new Date('May 12 2016 10:00:00 GMT+0200')),
     time: 8800,
     name: 'Project ICT'
   },
   {
-    date: moment(new Date('May 7 2016 10:00:00 GMT+0200')),
+    date: moment(new Date('May 14 2016 10:00:00 GMT+0200')),
     time: 7200,
     name: 'Angie'
   },
   {
-    date: moment(new Date('May 2 2016 13:00:00 GMT+0200')),
+    date: moment(new Date('May 9 2016 13:00:00 GMT+0200')),
     time: 4500,
     name: 'Wash dishes'
   },
   {
-    date: moment(new Date('May 4 2016 11:30:00 GMT+0200')),
+    date: moment(new Date('May 11 2016 11:30:00 GMT+0200')),
     time: 3600,
     name: 'Wash dishes'
   },
   {
-    date: moment(new Date('May 5 2016 15:00:00 GMT+0200')),
+    date: moment(new Date('May 12 2016 15:00:00 GMT+0200')),
     time: 3600,
     name: 'Angie'
   }
@@ -112,7 +112,7 @@ export default class CalendarSvg{
 
     this.width          = element.clientWidth;
     this.height         = element.clientHeight;
-    this.margin         = 60;
+    this.margin         = 20;
     this.yAxis          = 60;
     this.xAxis          = 20;
     this.cellWidth      = Math.round((this.width - this.yAxis - 2 * this.margin)/ 7);
@@ -129,8 +129,8 @@ export default class CalendarSvg{
     let day = moment().startOf('week');
     for (let i = 0; i < 7; i++) {
       const x = this.margin + this.yAxis + (i + 0.5) * this.cellWidth;
-      this.plain.text(x, this.margin, day.format('DD MMM'))
-        .attr({'font-size': '16px', 'text-anchor': 'middle'});
+      this.plain.text(x, this.margin + 10, day.format('DD MMM'))
+        .attr({'font-size': '14px', 'text-anchor': 'middle'});
       day = day.add(1, 'day');
     }
   }
