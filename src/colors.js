@@ -1,5 +1,6 @@
 export const white_light = '#FFFFFF';
 export const white_dark  = '#F7F7F7';
+export const white_darker  = '#EAEAEA';
 
 export const gray_light = '#dddddd';
 export const gray_medium = '#aaaaaa';
@@ -9,6 +10,8 @@ export const brand_blue = '#1F77B4';
 export const brand_blue_10 = '#2B93DB';
 export const brand_blue_20 = '#57A9E2';
 export const brand_blue_30 = '#82BFEA';
+export const brand_blue_40 = '#AED6F1';
+export const brand_blue_50 = '#D9ECF9';
 export const brand_blue_10d = darken(brand_blue, -10);
 export const brand_blue_20d = darken(brand_blue, -20);
 export const brand_blue_30d = darken(brand_blue, -30);
@@ -17,6 +20,7 @@ export const brand_orange = '#FF7F0E';
 export const brand_orange_10 = '#FF9A41';
 export const brand_orange_20 = '#FFB574';
 export const brand_orange_30 = '#FFD0A7';
+export const brand_orange_40 = '#FFEBDA';
 export const brand_orange_10d = darken(brand_orange, -10);
 export const brand_orange_20d = darken(brand_orange, -20);
 export const brand_orange_30d = darken(brand_orange, -30);
