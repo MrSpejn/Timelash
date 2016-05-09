@@ -91,5 +91,13 @@
 .categories-selection {
   min-width: 250px;
   max-width: 250px;
+}
 
+.activity-time-comparition {
+  width: 100%;
+  position: relative;
+  .chart-hint{
+    width: 80px;
+    opacity: .8;
+  }
 }
