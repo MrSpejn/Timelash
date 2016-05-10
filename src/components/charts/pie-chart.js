@@ -3,7 +3,7 @@ import d3                     from 'd3';
 
 import {darken}               from '../../colors';
 
-class PieChart extends Component{
+class PieChart extends Component {
   componentDidMount() {
     const width  = document.getElementById(this.props.name).clientWidth;
     const height = document.getElementById(this.props.name).clientHeight - 10;
@@ -48,7 +48,7 @@ class PieChart extends Component{
   }
 
   render() {
-    return <svg height='180' id={this.props.name}></svg>
+    return <svg height={this.props.height} id={this.props.name}></svg>
   }
 }
 export default PieChart;

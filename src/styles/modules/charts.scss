@@ -1,43 +1,152 @@
-#pie-chart {
+.line-chart {
   display: block;
-  margin: 0 auto;
-}
-#line-chart {
-  display: block;
-  margin: 0 auto;
 
   .line {
     fill: none;
     stroke-width: 3;
   }
-  circle{
-    width: 20px;
-    height: 20px;
+  .line-brand-orange{
+    stroke: $brand-orange;
   }
-  .area-blue{
+  .line-brand-blue{
+    stroke: $brand-blue;
+  }
+  circle{
+    width: 8px;
+    height: 8px;
+    cursor: pointer;
+
+    &.circle-brand-blue {
+      fill: $brand-blue;
+    }
+    &.circle-brand-orange {
+      fill: $brand-orange;
+    }
+  }
+  .area-brand-blue{
     fill: url(#gradient-blue);
   }
-  .area-orange{
+  .area-brand-orange{
     fill: url(#gradient-orange);
   }
+  .aura {
+    transition: r .5s ease;
+    fill: none;
+    stroke-width: 1;
+  }
 }
-#line-chart .axis{
+
+.line-chart .axis{
   path, line {
     fill: none;
-    stroke: black;
+    stroke: #888;
+    stroke-width: 0.5;
   }
   .path{
     stroke: none;
   }
   .line {
     fill: none;
-    stroke: blue;
+    stroke: #888;
     stroke-width: 1px;
   }
   .tick text{
+    fill: #888;
     font-size: 12px;
   }
   .tick line{
     opacity: 0.2;
+  }
+}
+
+.month-chart{
+  .heading{
+    font-size: 16px;
+    fill: $gray-5;
+  }
+  .day-text {
+    font-size: 16px;
+    fill: $brand-orange;
+  }
+  rect.valid:hover{
+    cursor: pointer;
+  }
+}
+
+#calendar {
+  width: 100%;
+  display: block;
+  background-color: $light-white-color;
+
+  text {
+    fill: $gray-5;
+    text-anchor: middle;
+    font-size: 16px;
+  }
+
+  rect:hover{
+    cursor: pointer;
+  }
+  line:first-of-type {
+    stroke: $gray-1;
+  }
+  line{
+    stroke-width: 1;
+    stroke:$dark-white-color;
+  }
+
+}
+
+.chart-hint {
+  box-sizing: border-box;
+  width: 200px;
+  background-color: #172A37;
+  border-radius: 3px;
+  position: absolute;
+  z-index: 20;
+  font-size: 14px;
+  color: #fafafa;
+  padding: 10px 10px;
+
+  h3{
+    text-align: center;
+    color: #6CD5FA;
+    font-size: 16px;
+    margin: 0;
+  }
+
+  &::after {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+
+
+  }
+  &--left::after, &--right::after {
+    top: 10px;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+  }
+  &--left::after{
+    left: 100%;
+    border-left: 10px solid #172A37;
+  }
+  &--right::after{
+    right: 100%;
+    border-right: 10px solid #172A37;
+  }
+
+  &--top::after, &--bottom::after {
+    left: 10px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+  }
+  &--top::after{
+    bottom: 100%;
+    border-bottom: 10px solid #172A37;
+  }
+  &--bottom::after{
+    top: 100%;
+    border-top: 10px solid #172A37;
   }
 }

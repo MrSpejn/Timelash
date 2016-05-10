@@ -16,6 +16,17 @@
   justify-content: center;
   display: flex;
 }
+.l-flex {
+  flex-wrap: nowrap;
+  display: flex;
+}
+.l-flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+.l-pushbit{
+  margin-left: 10px;
+}
 
 
 .section-title {
@@ -32,15 +43,7 @@
   position: relative;
   z-index: 5;
 }
-.app-row {
-  @extend .row;
-  width: 90%;
-  margin: 0 auto;
 
-  &>*{
-    padding: 0;
-  }
-}
 
 .app-section-title {
   margin: 10px auto 0;

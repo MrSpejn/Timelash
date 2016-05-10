@@ -1,12 +1,12 @@
 import React, {Component}     from 'react';
 import moment                 from 'moment';
 import CalendarSvg            from '../../utilities/svg-calendar';
-import CalendarHint           from './calendar-hint';
+import ChartHint              from '../charts/chart-hint';
 
 export default class CalendarWeeklyComponent extends Component{
   constructor() {
     super();
-    this.state = {shouldDisplayHint: false, hintOptions: null};
+    this.state = {shouldDisplayHint: false, story: false, hintOptions: null};
     this.days = [];
     const startingDate = moment().startOf('week');
     let date = startingDate;
@@ -25,10 +25,12 @@ export default class CalendarWeeklyComponent extends Component{
         x: parseInt(element.node.attributes.x.value),
         y: parseInt(element.node.attributes.y.value),
         targetWidth: parseInt(element.node.attributes.width.value),
-        item: story
+        targetHeight: 500 / 3600 * story.time / 60,
+        display: 'horizontal'
       };
       this.setState({
         hintOptions,
+        story,
         shouldDisplayHint: true
       });
     });
@@ -42,14 +44,16 @@ export default class CalendarWeeklyComponent extends Component{
 
   render() {
     return (
-      <div className="weekly-calendar-module">
-        <div className="weekly-calendar">
-          <h3 className="section-title">Calendar of weekly activities</h3>
-          <div className="weekly-calendar__hint-container">
-            {this.state.shouldDisplayHint && <CalendarHint options={this.state.hintOptions}/>}
-            <svg id="calendar" width="1036" height="500"></svg>
-          </div>
-        </div>
+      <div className="weekly-calendar__hint-container">
+        {this.state.shouldDisplayHint &&
+          <ChartHint options={this.state.hintOptions}>
+            <h3>{this.state.story.name}</h3>
+            <span><em>Started: </em>{this.state.story.date.format('hh:mm A')}</span><br />
+            <span><em>Duration: </em>{Math.round(this.state.story.time / 60)}min</span>
+          </ChartHint>
+
+      }
+        <svg id="calendar" width="100%" height="500"></svg>
       </div>
     )
   }

@@ -6,10 +6,9 @@ class Header extends Component{
   renderHeaderLinks() {
     if (this.props.authorized) {
       return [
+        <li key='activity'><Link className='header__link' to='/activity'>Activity</Link></li>,
         <li key='dashboard'><Link className='header__link' to='/dashboard'>Dashboard</Link></li>,
-        <li key='weekly'><Link className='header__link' to='/dashboard/weekly'>My Week</Link></li>,
         <li key='signout'><Link className='header__link' to='/signout'>Sign Out</Link></li>
-
       ];
     } else {
       return [
